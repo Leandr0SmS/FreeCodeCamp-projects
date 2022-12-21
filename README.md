@@ -1,9 +1,5 @@
+# FreeCodeCamp Projects
 
--------------------------------------------------------------------------------------------------------------------------
-
-# Project Title
-
-FreeCodeCamp Projects
 
 ## Description
 
