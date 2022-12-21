@@ -1,0 +1,57 @@
+<html lang="en">
+  <head>
+    <title>Survey Form</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="./styles.css" />
+    </head>
+    <body>
+        <div id="form-div">
+          <h1 id="title">Survey Form</h1>
+          <p id="description">Thank you for taking the time to help us improve our coffee.</p>
+          <hr>
+          <form id="survey-form">
+            <div class="form-subdiv">
+              <label id="name-label" for="name">Name <input id="name" type="text" placeholder="Enter your name..." required/></label>
+            </div>
+            <div class="form-subdiv">
+              <label id="email-label" for="email">Email <input id="email" type="email" placeholder="Enter your email..." required/></label>
+            </div>
+            <div class="form-subdiv">
+              <label id="number-label" for="number">Age <input id="number" type="number" min="15" max="120" placeholder="18" /></label>
+            </div>
+            <div class="form-subdiv">
+              <label>Which option best describes your experience with our coffee?
+                <select id="dropdown">
+                    <option value="">(Select one)</option>
+                    <option value="1">horrible</option>
+                    <option value="2">good</option>
+                    <option value="3">amazing</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-subdiv">
+              <p class="checks-p">Would you recommend our coffee to a friend?</p>
+              <label class="checks"><input type="radio" name="user-recommend" value="Definitely" class="input-radio"/>Definitely</label>
+              <label class="checks"><input type="radio" name="user-recommend" value="Maybe" class="input-radio"/>Maybe</label>
+              <label class="checks"><input type="radio" name="user-recommend" value="Not sure" class="input-radio"/>Not sure</label>
+            </div>
+            <div class="form-subdiv">
+              <p class="checks-p">What would you like to see improved? (Check all that apply)</p>
+              <label class="checks"><input name="prefer" value="front-end-projects" type="checkbox" class="input-checkbox">New flavors</label>
+              <label class="checks"><input name="prefer" value="back-end-projects" type="checkbox" class="input-checkbox">coffee packaging</label>
+            </div>
+            <div class="form-subdiv">
+              <label>Any comments or suggestions? 
+                <textarea id="comments" class="input-textarea" name="comment" rows="5" cols="10" placeholder="Enter your comment here..."></textarea>
+              </label>
+            </div>
+            <div id="submit-button" class="form-subdiv">
+              <button type="submit" id="submit" class="submit-button">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      </body>
+  </html>
