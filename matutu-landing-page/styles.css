@@ -46,53 +46,59 @@ body {
     overflow: hidden;
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 8rem 3rem;
-    justify-items:flex-start;
+    grid-template-rows: 6rem 6rem;
     background-color: var(--color2);
     border-bottom: 4px solid var(--color4);
+    justify-content: space-evenly;
+}
+
+/*logo*/
+
+#img-div {
+    grid-row: 1 / -1;
 }
 
 #header-img {
-    width: 8rem;
-    height: 8rem;
-    margin-top: 5%;
-    grid-row: 1 / -1;
+    height: 7rem;
+    margin: 0;
+    padding: 0;
     object-fit: contain;
 }
 
-#header-h1 {
+/*heading*/
+
+#heading-div {
     grid-column: 2 / -1;
+}
+
+#heading-h1 {
     margin: 0;
-    margin-left: 5%;
+    margin-left: 1rm;
     color: var(--color1);
     letter-spacing: 3rem;
-    font-weight: 400;
+    font-weight: 500;
     text-align: left;
     padding-top: 4%;
-    font-size: 450%;
+    font-size: 350%;
 }
 
 
 /* navbar */
 
+#nav-div {
+    grid-row: 2 / -1;
+    grid-column: 2 / -1;
+}
+
 #nav-bar {
     text-decoration: none;
-    grid-column: 2 / -1;
     margin: 0;
-    display: grid;
-    grid-template-columns: repeat(3, 5fr);
-    gap: 5rem;
 }
 
 .div-nav-link {
     background-color:#d4b59e;
     border: 2px solid #874b52;
-    margin: 10% 40%;
-    border-radius: 15px;
-    display: flex;
-    align-items:center;
-    justify-content:space-evenly;
-    padding: 0 60%;
+
 }
 
 .div-nav-link:hover {
