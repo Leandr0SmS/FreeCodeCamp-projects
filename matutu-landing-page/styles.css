@@ -1,4 +1,22 @@
 
+:root {
+    /*dumatutu*/
+   --color1: #874b52;
+   --color2: #874b52;
+   --color3: #775135; 
+   --color4: #c07d59;
+
+   /*color generator*/
+   --armadillo: #4E493D;
+   --soft-amber: #D3C0B4;
+   --hit-gray: #9EACAF;
+   --green-smoke: #8EA975;
+   --patina: #223E14;
+   --fern: #B0C593;
+   --swamp-green: #6DB170;
+   --seaweed: #56988A;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -10,14 +28,13 @@
     src: url('https://www.fontsaddict.com/fontface/lemonmilk.ttf');
 }
 
-
 body {
     box-sizing: border-box;
     margin: 0;
     font-family: 'Josefin Sans', sans-serif;
     word-spacing: 1rem;
     letter-spacing: 0.3rem;
-    background-color:  #874b52;
+    background-color:  var(--color1);
     /* #874b52 
         #775135 
         #c07d59*/
