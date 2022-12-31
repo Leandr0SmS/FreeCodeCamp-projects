@@ -35,9 +35,6 @@ body {
     word-spacing: 1rem;
     letter-spacing: 0.3rem;
     background-color:  var(--color1);
-    /* #874b52 
-        #775135 
-        #c07d59*/
 }
 
 #header {
@@ -49,7 +46,7 @@ body {
     grid-template-rows: 8rem 3rem;
     justify-items:flex-start;
     background-color: #d4b59e;
-    border-bottom: 4px solid #c07d59;
+    border-bottom: 4px solid var(--color4);
 }
 
 .img-header {
