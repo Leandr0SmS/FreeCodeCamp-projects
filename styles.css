@@ -98,7 +98,6 @@ a {
     border-radius: 10px 10px 0 0;
 }
 
-
 @media only screen and (max-width: 1040px) {
     .nav-link {
         font-size: 1rem;
@@ -111,26 +110,6 @@ a {
 
     .project-title {
         font-size: 1.3rem;
-        padding: 1rem 0.5rem;
-    }
-}
-
-@media only screen and (max-width: 740px) {
-    .nav-link {
-        font-size: 0.8rem;
-        text-shadow: 2px 2px 1px #1d1d2cf6;
-    }
-
-    #header {
-        font-size: 2rem;
-    }
-
-    .project-image{
-        height: calc(100% - 3rem);
-    }
-
-    .project-title {
-        font-size: 1rem;
         padding: 1rem 0.5rem;
     }
 }
