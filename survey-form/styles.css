@@ -13,9 +13,9 @@ h1 {
 }
 
 hr {
-    height: 3px;
+    height: 0.2rem;
     background-color: brown;
-    border-width: 2px;
+    border-width: 0.1rem;
     border-color: brown;
 }
 
@@ -42,7 +42,11 @@ textarea,
 select {
   margin: 1% 0 0 0;
   width: 100%;
-  min-height: 2em;
+  height: 2em;
+}
+
+#comments {
+    height: 6rem;
 }
 
 .form-subdiv {
@@ -72,9 +76,45 @@ button {
     font-size: 1.1rem;
     background-color: brown;
     border-color: white;
-    min-width: 300px;
+
 }
 
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 400px) {
+    #form-div {
+        font-size: small;
+    }
 
+    input, textarea, select {
+        width: 80%;
+        height: 1.5rem;
+    }
+
+    #comments {
+        height: 4rem;
+    }
+
+    .checks {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 365px) {
+    #form-div {
+        font-size:x-small;
+    }
+
+    input, textarea, select {
+        width: 80%;
+        height: 1rem;
+        font-size: 0.7rem;
+    }
+
+    #form-div {
+        min-width: 150px;
+    }
+
+    .form-subdiv {
+        display: flex;
+        flex-direction: column;
+    }
 }
