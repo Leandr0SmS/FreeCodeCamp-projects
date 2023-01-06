@@ -144,6 +144,7 @@ hr {
     margin-bottom: 0.2rem;
     margin-top: 3rem;
     letter-spacing: 0.1rem;
+    text-align: center;
 }
 
 form {
@@ -275,8 +276,9 @@ footer p {
         padding: 0 3.3rem;
     }
 
-    #form-sect h2 {
+    .form-headings {
         font-size: 1.1em;
+        text-align: center;
     }
 }
 
@@ -302,8 +304,8 @@ footer p {
         padding-top: 8rem;
     }
 
-    #form-sect h2 {
-        font-size: 0.8em;
+    #icon-divs {
+        font-size: 0.9rem;
     }
 }
 
@@ -321,8 +323,7 @@ footer p {
     }
 
     #heading-h1 {
-        font-size: 1.5rem;
-        
+        font-size: 1.5rem; 
     }
 
     #img-logo-div {
@@ -343,7 +344,77 @@ footer p {
         padding-top: 7rem;
     }
 
-    #form-sect h2 {
-        font-size: 0.6em;
+    #icon-divs {
+        font-size: 0.8rem;
+    }
+
+    .form-headings {
+        font-size: 0.8rem;
+    }
+}
+
+@media only screen and (max-width: 555px) {
+    #heading-h1 {
+        letter-spacing: 2rem;
+    }
+
+    .nav-link {
+        font-size: 0.6rem;
+        padding: 0 1.5rem;
+    }
+
+    #form-label {
+        font-size: 1rem;
+    }
+
+    #icon-divs {
+        font-size: 0.5rem;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    #heading-h1 {
+        letter-spacing: 1.5rem;
+    }
+
+    .nav-link {
+        padding: 0 0.9rem;
+    }
+
+    #submit {
+        font-size: 0.7rem;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    #heading-h1 {
+        letter-spacing: 1rem;
+    }
+
+    .nav-link {
+        padding: 0 0.4rem;
+    }
+}
+
+@media only screen and (max-width: 330px) {
+    #form-sect {
+        margin: 0 0.4rem;
+    }
+
+    #heading-h1 {
+        letter-spacing: 0.8rem;
+    }
+
+    .nav-link {
+        font-size: 0.5rem;
+        padding: 0 0.2rem;
+    }
+
+    #email {
+        font-size: 0.6rem;
+    }
+
+    #submit {
+        font-size: 0.5rem;
     }
 }
