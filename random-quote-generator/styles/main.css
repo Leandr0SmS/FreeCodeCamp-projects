@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+body {
+  box-sizing: border-box;
+  margin: 0;
+  height: 100%;
+  min-height: 100vh;
+  font-family: "Permanent Marker", cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.quote-box {
+  width: 34.375rem;
+  padding: 2.5rem 3.125rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 0 0.625rem 0.0625rem rgba(0, 0, 0, 0.25);
+  -webkit-backdrop-filter: blur(0.9375rem);
+  backdrop-filter: blur(0.9375rem);
+}
+
+.quote_icon {
+  width: 2rem;
+}/*# sourceMappingURL=main.css.map */
