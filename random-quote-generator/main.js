@@ -1,6 +1,20 @@
 const { useEffect, useState } = React;
 const { createRoot } = ReactDOM;
 
+let quotesData;
+fetch("https://type.fit/api/quotes")
+    .then(res => res.json())
+    .then(data => {
+        console.log("setData")
+        quotesData = data
+    })
+    .then(() => {
+        //render
+        const app = document.getElementById('root');
+        const root = createRoot(app);
+        root.render(<App/>);
+    })
+
 const colors = [
     '#16a085',
     '#27ae60',
@@ -45,14 +59,6 @@ const App = () => {
 
     const [colorIndex, setColorIndex] = useState(0);
 
-    const [quotes, setQuotes] = useState(false);
-
-    useEffect(() => {
-        fetch("https://type.fit/api/quotes")
-            .then(res => res.json())
-            .then(data => setQuotes(data))
-    }, []);
-
     document.body.style.backgroundColor = `${colors[colorIndex]}`;  
 
     const randomIndex = (array) => Math.floor(Math.random() * (array.length));
@@ -66,21 +72,13 @@ const App = () => {
         document.body.style.backgroundColor = `${colors[colorIndex]}`;
     };
 
-    console.log(quotes);
-
-    if (quotes) {
-        return <QuoteBox
-                    onNewQuoteClick={handleNewQuoteClick}
-                    color={colors[colorIndex]}
-                    text={quotes[randomIndex(quotes)].text}
-                    author={quotes[randomIndex(quotes)].author}
-                />
-    } else {
-        return <h1></h1>
-    }
+    return (
+        <QuoteBox
+            onNewQuoteClick={handleNewQuoteClick}
+            color={colors[colorIndex]}
+            text={quotesData[randomIndex(quotesData)].text}
+            author={quotesData[randomIndex(quotesData)].author}
+        />
+    )
 };
 
-//render
-const app = document.getElementById('root');
-const root = createRoot(app);
-root.render(<App/>);
