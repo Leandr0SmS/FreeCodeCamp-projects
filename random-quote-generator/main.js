@@ -54,10 +54,10 @@ const App = () => {
     }, []);
 
     document.body.style.backgroundColor = `${colors[colorIndex]}`;  
- 
+
+    const randomIndex = (array) => Math.floor(Math.random() * (array.length));
 
     const handleNewQuoteClick = () => {
-        const randomIndex = (array) => Math.floor(Math.random() * (array.length));
         let i = randomIndex(colors);
         while (i === colorIndex) {
             i = randomIndex(colors);
@@ -72,6 +72,8 @@ const App = () => {
         return <QuoteBox
                     onNewQuoteClick={handleNewQuoteClick}
                     color={colors[colorIndex]}
+                    text={quotes[randomIndex(quotes)].text}
+                    author={quotes[randomIndex(quotes)].author}
                 />
     } else {
         return <h1></h1>
