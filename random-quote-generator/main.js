@@ -34,21 +34,23 @@ const QuoteBox = ({onNewQuoteClick, color, text, author}) => {
     return (
         <div className="quote-box" id="quote-box">
             <div className="quote-text">
-                <i className="fa-sharp fa-solid fa-quote-left" style={{color: `${color}`}}></i>
-                <span id="text">{text}</span>
+                <p id="text" style={{color: `${color}`}}>
+                    <i className="fa-sharp fa-solid fa-quote-left fa-lg icon-margin" style={{color: `${color}`}}></i>
+                    {text}
+                </p>
             </div>
-            <div className="quote-author">- <span id="author">{author}</span></div>
+            <p className="quote-author" style={{color: `${color}`}}>- <span id="author">{author ? author : "unknow"}</span></p>
             <div className="buttons">
                 <a
                     className="button"
                     id="tweet-quote"
                     title="Tweet this quote!"
-                    href="twitter.com/intent/tweet"
+                    href="https://twitter.com/intent/tweet"
                     target="_top"
                 >
-                <i className="fa-brands fa-twitter" style={{color: `${color}`}}></i>
+                <i className="fa-brands fa-twitter fa-2xl" style={{color: `${color}`}}></i>
                 </a>
-                <button className="button" id="new-quote" onClick={onNewQuoteClick}>New quote</button>
+                <button className="button" id="new-quote" onClick={onNewQuoteClick} style={{backgroundColor: `${color}`}}>New quote</button>
             </div>
         </div>
     )
