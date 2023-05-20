@@ -1,3 +1,6 @@
+const { useEffect, useState } = React;
+const { createRoot } = ReactDOM;
+
 const colors = [
     '#16a085',
     '#27ae60',
@@ -13,19 +16,14 @@ const colors = [
     '#73A857'
 ];
 
-const QuoteBox = ({onNewQuoteClick}) => {
+const QuoteBox = ({onNewQuoteClick, color, text, author}) => {
     return (
         <div className="quote-box" id="quote-box">
             <div className="quote-text">
-                <img
-                    className="quote_icon"
-                    src="./images/quote_icon.svg"
-                    alt="quote icon"
-                    aria-hidden="false"
-                    role="img"
-                /><span id="text"></span>
+                <i className="fa-sharp fa-solid fa-quote-left" style={{color: `${color}`}}></i>
+                <span id="text">{text}</span>
             </div>
-            <div className="quote-author">- <span id="author"></span></div>
+            <div className="quote-author">- <span id="author">{author}</span></div>
             <div className="buttons">
                 <a
                     className="button"
@@ -34,7 +32,7 @@ const QuoteBox = ({onNewQuoteClick}) => {
                     href="twitter.com/intent/tweet"
                     target="_top"
                 >
-                    <i className="fa fa-twitter"></i>
+                <i className="fa-brands fa-twitter" style={{color: `${color}`}}></i>
                 </a>
                 <button className="button" id="new-quote" onClick={onNewQuoteClick}>New quote</button>
             </div>
@@ -45,30 +43,42 @@ const QuoteBox = ({onNewQuoteClick}) => {
 
 const App = () => {
 
-    const [colorIndex, setColorIndex] = React.useState(0);
-    
-    document.body.style.backgroundColor = `${colors[colorIndex]}`;
+    const [colorIndex, setColorIndex] = useState(0);
+
+    const [quotes, setQuotes] = useState(false);
+
+    useEffect(() => {
+        fetch("https://type.fit/api/quotes")
+            .then(res => res.json())
+            .then(data => setQuotes(data))
+    }, []);
+
+    document.body.style.backgroundColor = `${colors[colorIndex]}`;  
+ 
 
     const handleNewQuoteClick = () => {
-        const randomIndex = () => Math.floor(Math.random() * (colors.length));
-        let i = randomIndex();
+        const randomIndex = (array) => Math.floor(Math.random() * (array.length));
+        let i = randomIndex(colors);
         while (i === colorIndex) {
-            i = randomIndex();
+            i = randomIndex(colors);
         }
         setColorIndex(i);
-        console.log(i)
         document.body.style.backgroundColor = `${colors[colorIndex]}`;
     };
 
-    console.log(colors[colorIndex])
-    return (
-        <QuoteBox
-            onNewQuoteClick={handleNewQuoteClick}
-        />
-    )
+    console.log(quotes);
+
+    if (quotes) {
+        return <QuoteBox
+                    onNewQuoteClick={handleNewQuoteClick}
+                    color={colors[colorIndex]}
+                />
+    } else {
+        return <h1></h1>
+    }
 };
 
 //render
 const app = document.getElementById('root');
-const root = ReactDOM.createRoot(app);
+const root = createRoot(app);
 root.render(<App/>);
