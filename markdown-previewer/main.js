@@ -3,11 +3,12 @@ const {useState} = React;
 const Form = ({textValue, onChangeText}) => {
 
     return (
-        <form>
+        <form className="form">
             <div>
-                <h1 className="editor--header">Editor</h1>
+                <h1 className="header">Editor</h1>
             </div>
             <textarea
+                className="editor"
                 value={textValue}
                 onChange={onChangeText}
             />
@@ -22,9 +23,12 @@ const Marked = ({string}) => {
     return (
         <div>
             <div>
-                <h1 className="editor--header">Previewer</h1>
+                <h1 className="header">Previewer</h1>
             </div>
-            <div dangerouslySetInnerHTML={{ __html: filtered }} />
+            <div 
+                className="previewer"
+                dangerouslySetInnerHTML={{ __html: filtered }} 
+            />
         </div>
     )
 }
