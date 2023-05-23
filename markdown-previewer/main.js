@@ -4,6 +4,9 @@ const Form = ({textValue, onChangeText}) => {
 
     return (
         <form>
+            <div>
+                <h1 className="editor--header">Editor</h1>
+            </div>
             <textarea
                 value={textValue}
                 onChange={onChangeText}
@@ -17,7 +20,12 @@ const Marked = ({string}) => {
     const filtered = filterXSS(parsed);
 
     return (
-      <div dangerouslySetInnerHTML={{ __html: filtered }} />
+        <div>
+            <div>
+                <h1 className="editor--header">Previewer</h1>
+            </div>
+            <div dangerouslySetInnerHTML={{ __html: filtered }} />
+        </div>
     )
 }
 
