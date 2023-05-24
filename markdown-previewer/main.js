@@ -3,16 +3,14 @@ const {useState} = React;
 const Form = ({textValue, onChangeText}) => {
 
     return (
-        <form className="form">
-            <div>
-                <h1 className="header">Editor</h1>
-            </div>
+        <div className="editor box">
+            <h1 className="header">Editor</h1>
             <textarea
-                className="editor"
+                className="textarea"
                 value={textValue}
                 onChange={onChangeText}
             />
-        </form>
+        </div>
     )
 }
 
@@ -21,10 +19,8 @@ const Marked = ({string}) => {
     const filtered = filterXSS(parsed);
 
     return (
-        <div>
-            <div>
-                <h1 className="header">Previewer</h1>
-            </div>
+        <div className="box">
+            <h1 className="header">Previewer</h1>
             <div 
                 className="previewer"
                 dangerouslySetInnerHTML={{ __html: filtered }} 
