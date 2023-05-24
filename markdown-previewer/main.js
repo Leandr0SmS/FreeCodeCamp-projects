@@ -7,6 +7,7 @@ const Form = ({textValue, onChangeText}) => {
             <h1 className="header">Editor</h1>
             <textarea
                 className="textarea"
+                placeholder="markdown here..."
                 value={textValue}
                 onChange={onChangeText}
             />
