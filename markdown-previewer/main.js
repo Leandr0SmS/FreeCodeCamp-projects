@@ -1,7 +1,6 @@
 const {useState} = React; 
 
-const markdownContent = `
-# Markdown Previewer: 
+const markdownContent = `# Markdown Previewer: 
 ---
 <br>
 
@@ -34,7 +33,6 @@ const Form = ({textValue, onChangeText}) => {
             <h1 className="header">Editor</h1>
             <textarea
                 id="editor"
-                placeholder={markdownContent}
                 value={textValue}
                 onChange={onChangeText}
             />
@@ -65,8 +63,8 @@ const App = () => {
     return (
         <React.Fragment>
             <Form
-                value={formData}
                 onChangeText={e => setFormData(e.target.value)}
+                textValue={formData}
             />
             <Marked
                 string={formData}
