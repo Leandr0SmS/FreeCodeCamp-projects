@@ -13,10 +13,12 @@ const markdownContent = `# Markdown Previewer:
 ### Delevoped with:
 
 - React
-- [Marked](https://cdnjs.com/libraries/marked)
 \`\`\`
-marked.parse(string, {mangle: false, headerIds: false, breaks: true});
+const app = document.getElementById('root');
+const root = ReactDOM.createRoot(app);
+root.render(<App/>);
 \`\`\`
+- [Marked](https://cdnjs.com/libraries/marked) \`marked.parse(string, {mangle: false, headerIds: false, breaks: true});\`
 
 <br>
 
