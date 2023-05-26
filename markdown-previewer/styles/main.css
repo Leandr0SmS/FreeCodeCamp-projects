@@ -17,6 +17,8 @@ body {
 
 .box {
   margin: 1rem;
+  width: -moz-min-content;
+  width: min-content;
 }
 
 .header {
@@ -41,6 +43,7 @@ body {
   background-color: bisque;
   padding: 1rem;
   background-color: #FFFFFF;
+  border: 1px solid #000000;
 }
 .previewer img {
   display: block;

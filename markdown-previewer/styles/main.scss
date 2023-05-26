@@ -18,6 +18,7 @@ body {
 
 .box {
     margin: 1rem;
+    width: min-content;
 }
 
 .header {
@@ -42,6 +43,7 @@ body {
     background-color: bisque;
     padding: 1rem;
     background-color: $White;
+    border: 1px solid $Black;
     img {
         display: block;
         max-width: 90%;
