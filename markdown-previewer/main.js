@@ -14,6 +14,9 @@ const markdownContent = `# Markdown Previewer:
 
 - React
 - [Marked](https://cdnjs.com/libraries/marked)
+\`\`\`
+marked.parse(string, {mangle: false, headerIds: false, breaks: true});
+\`\`\`
 
 <br>
 
@@ -33,6 +36,7 @@ const Form = ({textValue, onChangeText}) => {
             <h1 className="header">Editor</h1>
             <textarea
                 id="editor"
+                placeholder={markdownContent}
                 value={textValue}
                 onChange={onChangeText}
             />
@@ -41,7 +45,7 @@ const Form = ({textValue, onChangeText}) => {
 }
 
 const Marked = ({string}) => {
-    const parsed = marked.parse(string, {mangle: false, headerIds: false});
+    const parsed = marked.parse(string, {mangle: false, headerIds: false, breaks: true});
     const filtered = filterXSS(parsed);
 
     return (
@@ -50,7 +54,8 @@ const Marked = ({string}) => {
             <div 
                 id="preview"
                 dangerouslySetInnerHTML={{ __html: filtered }} 
-            />
+            >
+            </div>
         </div>
     )
 }

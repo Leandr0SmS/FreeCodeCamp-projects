@@ -9,6 +9,9 @@
 
 - React
 - [Marked](https://cdnjs.com/libraries/marked)
+```
+marked.parse(string, {mangle: false, headerIds: false, breaks: true});
+```
 
 ---
 -[Created by Leandr0SmS](https://github.com/Leandr0SmS)
