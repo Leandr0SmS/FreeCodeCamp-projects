@@ -29,15 +29,14 @@ body {
     font-size: 1.5rem;
 }
 
-.textarea {
+#editor {
     width: 80vw;
     min-height: 10rem;
     padding: 1rem;
     background-color: $White;
     font-family: 'Chakra Petch', sans-serif;
 }
-
-.previewer {
+#preview {
     width: 80vw;
     min-height: 30rem;
     background-color: bisque;

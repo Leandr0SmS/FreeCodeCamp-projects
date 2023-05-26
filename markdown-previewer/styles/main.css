@@ -29,7 +29,7 @@ body {
   font-size: 1.5rem;
 }
 
-.textarea {
+#editor {
   width: 80vw;
   min-height: 10rem;
   padding: 1rem;
@@ -37,7 +37,7 @@ body {
   font-family: "Chakra Petch", sans-serif;
 }
 
-.previewer {
+#preview {
   width: 80vw;
   min-height: 30rem;
   background-color: bisque;
@@ -45,7 +45,7 @@ body {
   background-color: #FFFFFF;
   border: 1px solid #000000;
 }
-.previewer img {
+#preview img {
   display: block;
   max-width: 90%;
   margin: 2rem auto;

@@ -1,4 +1,31 @@
-const {useState} = React;
+const {useState} = React; 
+
+const markdownContent = `
+# Markdown Previewer: 
+---
+<br>
+
+## Markdown Previewer:
+
+> Project to **FreeCodeCamp** curriculum
+
+<br>
+
+### Delevoped with:
+
+- React
+- [Marked](https://cdnjs.com/libraries/marked)
+
+<br>
+
+---
+
+<br>
+
+[Created by Leandr0SmS](https://github.com/Leandr0SmS)
+<br>
+
+![freeCodeCamp Logo](https://cdn.freecodecamp.org/testable-projects-fcc/images/fcc_secondary.svg)`;
 
 const Form = ({textValue, onChangeText}) => {
 
@@ -6,8 +33,8 @@ const Form = ({textValue, onChangeText}) => {
         <div className="editor box">
             <h1 className="header">Editor</h1>
             <textarea
-                className="textarea"
-                placeholder="markdown here..."
+                id="editor"
+                placeholder={markdownContent}
                 value={textValue}
                 onChange={onChangeText}
             />
@@ -23,7 +50,7 @@ const Marked = ({string}) => {
         <div className="box">
             <h1 className="header">Previewer</h1>
             <div 
-                className="previewer"
+                id="preview"
                 dangerouslySetInnerHTML={{ __html: filtered }} 
             />
         </div>
@@ -32,8 +59,9 @@ const Marked = ({string}) => {
 
 const App = () => {
 
-    const [formData, setFormData] = useState('')
+    const [formData, setFormData] = useState(markdownContent)
 
+    console.log(formData);
     return (
         <React.Fragment>
             <Form
