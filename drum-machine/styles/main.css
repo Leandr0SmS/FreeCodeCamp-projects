@@ -20,7 +20,6 @@ body {
 }
 
 #drum-machine {
-  width: 30rem;
   height: 30rem;
   background-color: #CF4249;
   border: 3px solid #15227A;
@@ -49,9 +48,10 @@ body {
 }
 .pads-div .drum-pad {
   background-color: #BFD7ED;
-  padding: 2rem;
+  padding: 2rem 3rem;
   border-radius: 0.3rem;
   margin: 0.7rem;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  font-weight: bold;
   cursor: pointer;
 }/*# sourceMappingURL=main.css.map */
