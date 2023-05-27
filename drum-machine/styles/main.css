@@ -28,6 +28,7 @@ body {
   padding: 2rem;
   flex-direction: column;
   gap: 2rem;
+  box-shadow: 0rem 1rem 1.875rem -0.625rem #1D141E;
 }
 
 #display {
@@ -50,6 +51,7 @@ body {
   background-color: #BFD7ED;
   padding: 2rem;
   border-radius: 0.3rem;
-  margin: 0.5rem;
+  margin: 0.7rem;
   font-size: 1.5rem;
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */

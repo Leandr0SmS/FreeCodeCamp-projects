@@ -23,6 +23,7 @@ body {
     @extend %center-flex;
     flex-direction: column;
     gap: 2rem;
+    box-shadow: 0rem 1rem 1.875rem -0.625rem $Ebony;
 }
 
 #display {
@@ -45,7 +46,8 @@ body {
         background-color: $Baby-Blue;
         padding: 2rem;
         border-radius: 0.3rem;
-        margin: 0.5rem;
+        margin: 0.7rem;
         font-size: 1.5rem;
+        cursor: pointer;
     }
 }
