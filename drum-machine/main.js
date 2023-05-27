@@ -67,41 +67,44 @@ const Drum = ({displayValue}) => {
 const App = () => {
 
     let display;
+    
 
-    switch (action_id) {
-        case "Q":
-            display = "clap"
-            break;
-        case "W":
-            display = "close hh"
-            break;
-        case "E":
-            display = "open hh"
-            break;
-        case "A":
-            display = "heater 1"
-            break;
-        case "S":
-            display = "heater 2"
-            break;
-        case "D":
-            display = "heater 3"
-            break;
-        case "Z":
-            display = "heater 4"
-            break;
-        case "X":
-            display = "kick n' hat"
-            break;
-        case "C":
-            display = "kick"
-            break;
-        default:
-            console.log(`data error`);
-    }
+    //switch (id) {
+    //    case "Q":
+    //        display = "clap"
+    //        break;
+    //    case "W":
+    //        display = "close hh"
+    //        break;
+    //    case "E":
+    //        display = "open hh"
+    //        break;
+    //    case "A":
+    //        display = "heater 1"
+    //        break;
+    //    case "S":
+    //        display = "heater 2"
+    //        break;
+    //    case "D":
+    //        display = "heater 3"
+    //        break;
+    //    case "Z":
+    //        display = "heater 4"
+    //        break;
+    //    case "X":
+    //        display = "kick n' hat"
+    //        break;
+    //    case "C":
+    //        display = "kick"
+    //        break;
+    //    default:
+    //        console.log(`data error`);
+    //}
 
     return (
-        <Drum/>
+        <Drum 
+            displayValue="Something.."
+        />
     )
 };
 

@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap");
+#display, #drum-machine, body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   font-family: "Goldman", cursive;
@@ -11,4 +17,39 @@
 body {
   height: 100%;
   min-height: 100vh;
+}
+
+#drum-machine {
+  width: 30rem;
+  height: 30rem;
+  background-color: #CF4249;
+  border: 3px solid #15227A;
+  border-radius: 1rem;
+  padding: 2rem;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#display {
+  width: 60%;
+  background-color: #6bb22f;
+  color: #4b6c52;
+  border: 2px solid #1D141E;
+  border-radius: 0.3rem;
+  padding: 0.5rem 0;
+}
+
+.pads-div {
+  background-color: #15227A;
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 2px solid #7B2C34;
+}
+.pads-div .drum-pad {
+  background-color: #BFD7ED;
+  padding: 2rem;
+  border-radius: 0.3rem;
+  margin: 0.5rem;
+  font-size: 1.5rem;
 }/*# sourceMappingURL=main.css.map */
