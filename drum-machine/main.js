@@ -3,45 +3,54 @@ const {useState} = React;
 let padsData = [
     {
         id: "Q",
-        audioSrc: "clap.mp3"
+        audioSrc: "clap.mp3",
+        name: "clap"
     },
     {
         id: "W",
-        audioSrc: "clap.mp3"
+        audioSrc: "close-hh.mp3",
+        name: "close hh"
     },
     {
         id: "E",
-        audioSrc: "clap.mp3"
+        audioSrc: "open-hh.mp3",
+        name: "open hh"
     },
     {
         id: "A",
-        audioSrc: "clap.mp3"
+        audioSrc: "heater-1.mp3",
+        name: "heater 1"
     },
     {
         id: "S",
-        audioSrc: "clap.mp3"
+        audioSrc: "heater-2.mp3",
+        name: "heater 2"
     },
     {
         id: "D",
-        audioSrc: "clap.mp3"
+        audioSrc: "heater-3.mp3",
+        name: "heater 3"
     },
     {
         id: "Z",
-        audioSrc: "clap.mp3"
+        audioSrc: "heater-4.mp3",
+        name: "heater 4"
     },
     {
         id: "X",
-        audioSrc: "clap.mp3"
+        audioSrc: "kick_n_hat.mp3",
+        name: "kick 'n hat"
     },
     {
         id: "C",
-        audioSrc: "clap.mp3"
+        audioSrc: "kick.mp3",
+        name: "kick"
     }
 ]
 
-const Pad = ({onPadClick, id, audioSrc}) => {
+const Pad = ({onPadClick, id, audioSrc, name}) => {
     return (
-        <div className="drum-pad" onClick={onPadClick}>
+        <div className="drum-pad" onMouseDown={onPadClick} name={name}>
             {id}
             <audio className="clip" id={id}>
                 <source src={`./songs/${audioSrc}`} type="audio/mpeg"/>
@@ -56,8 +65,9 @@ const App = () => {
     const [pad, setPad] = useState(null);
 
     const handlePadClick = (e) => {
-        console.log(e.target.children[0])
-        e.target.children[0].play()
+        console.log(e.target.getAttribute('name'));
+        e.target.children[0].play();
+        setPad(e.target.getAttribute('name'));
     };
 
     const pads = padsData.map(p  => {
@@ -67,47 +77,17 @@ const App = () => {
                 onPadClick={handlePadClick}
                 id={p.id}
                 audioSrc={p.audioSrc}
+                name={p.name}
             />
         )
     })
 
-    let display;
-    switch (pad) {
-        case "Q":
-            display = "clap"
-            break;
-        case "W":
-            display = "close hh"
-            break;
-        case "E":
-            display = "open hh"
-            break;
-        case "A":
-            display = "heater 1"
-            break;
-        case "S":
-            display = "heater 2"
-            break;
-        case "D":
-            display = "heater 3"
-            break;
-        case "Z":
-            display = "heater 4"
-            break;
-        case "X":
-            display = "kick n' hat"
-            break;
-        case "C":
-            display = "kick"
-            break;
-        default:
-            console.log(`data error`);
-    }
+    console.log(pad)
 
     return (
         <div id="drum-machine">
             <div id="display">
-                {display}
+                {pad}
             </div>
             <div className="pads-div">
                 {pads}

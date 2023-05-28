@@ -14,7 +14,6 @@ body {
 }
 
 #drum-machine {
-    height: 30rem;
     background-color: $Red;
     border: 3px solid $Royal-blue;
     border-radius: 1rem;
@@ -26,13 +25,16 @@ body {
 }
 
 #display {
-    width: 60%;
+    width: 70%;
+    min-height: 3rem;
     background-color: $kelly-green;
     color: $hunter-green;
     border: 2px solid $Ebony;
     border-radius: 0.3rem;
     @extend %center-flex;
     padding: 0.5rem 0;
+    font-size: 1.5rem;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .pads-div {

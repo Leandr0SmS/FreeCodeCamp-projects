@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&family=Press+Start+2P&display=swap");
 #display, #drum-machine, body {
   display: flex;
   align-items: center;
@@ -20,7 +20,6 @@ body {
 }
 
 #drum-machine {
-  height: 30rem;
   background-color: #CF4249;
   border: 3px solid #15227A;
   border-radius: 1rem;
@@ -31,12 +30,15 @@ body {
 }
 
 #display {
-  width: 60%;
+  width: 70%;
+  min-height: 3rem;
   background-color: #6bb22f;
   color: #4b6c52;
   border: 2px solid #1D141E;
   border-radius: 0.3rem;
   padding: 0.5rem 0;
+  font-size: 1.5rem;
+  font-family: "Press Start 2P", cursive;
 }
 
 .pads-div {
