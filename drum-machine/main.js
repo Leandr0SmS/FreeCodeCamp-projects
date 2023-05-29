@@ -70,6 +70,13 @@ const App = () => {
     const [display, setdisplay] = useState(null);
 
     useEffect(() => {
+        const handleKeyDown = (e) => {
+            const pad = padsData.filter(p => (p.id == e.key.toUpperCase()));
+            if (pad.length == 1) {
+                setdisplay(pad[0].name);
+                document.getElementById(`${pad[0].id}`).play();
+            }
+        };
         window.addEventListener('keypress', handleKeyDown);
         return () => {
           window.removeEventListener('keypress', handleKeyDown);
@@ -80,14 +87,6 @@ const App = () => {
         const pad = e.target;
         e.target.children[0].play();
         setdisplay(pad.getAttribute('name'));
-    };
-
-    const handleKeyDown = (e) => {
-        const pad = padsData.filter(p => (p.id == e.key.toUpperCase()));
-        if (pad.length == 1) {
-            setdisplay(pad[0].name);
-            document.getElementById(`${pad[0].id}`).play();
-        }
     };
 
     const pads = padsData.map(p  => {
