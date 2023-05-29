@@ -48,7 +48,7 @@ let padsData = [
     }
 ]
 
-const Pad = ({onPadClick, isAudioPlaying, id, audioSrc, name}) => {
+const Pad = ({onPadClick, id, audioSrc, name}) => {
     return (
         <div 
             className="drum-pad" 
@@ -58,7 +58,7 @@ const Pad = ({onPadClick, isAudioPlaying, id, audioSrc, name}) => {
         >
             {id}
             <audio className="clip" id={id}>
-                <source src={`./songs/${audioSrc}`} type="audio/mpeg" autoPlay={isAudioPlaying}/>
+                <source src={`./songs/${audioSrc}`} type="audio/mpeg"/>
             </audio>
         </div>
     )
@@ -68,20 +68,8 @@ const Pad = ({onPadClick, isAudioPlaying, id, audioSrc, name}) => {
 const App = () => {
 
     const [display, setdisplay] = useState(null);
-    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
     useEffect(() => {
-
-        const handleKeyDown = (e) => {
-            console.log(e.key);
-            console.log(e.target);
-            const pad = padsData.filter(p => (p.id == e.key.toUpperCase()));
-            if (pad.length == 1) {
-                setdisplay(pad[0].name);
-                setIsAudioPlaying(true)
-            }
-        };
-
         window.addEventListener('keypress', handleKeyDown);
         return () => {
           window.removeEventListener('keypress', handleKeyDown);
@@ -90,9 +78,16 @@ const App = () => {
 
     const handlePadClick = (e) => {
         const pad = e.target;
-        console.log(pad.getAttribute('name'));
         e.target.children[0].play();
         setdisplay(pad.getAttribute('name'));
+    };
+
+    const handleKeyDown = (e) => {
+        const pad = padsData.filter(p => (p.id == e.key.toUpperCase()));
+        if (pad.length == 1) {
+            setdisplay(pad[0].name);
+            document.getElementById(`${pad[0].id}`).play();
+        }
     };
 
     const pads = padsData.map(p  => {
@@ -100,15 +95,12 @@ const App = () => {
             <Pad
                 key={p.id}
                 onPadClick={handlePadClick}
-                isAudioPlaying={isAudioPlaying}
                 id={p.id}
                 audioSrc={p.audioSrc}
                 name={p.name}
             />
         )
     })
-
-    console.log(isAudioPlaying)
 
     return (
         <div id="drum-machine">
