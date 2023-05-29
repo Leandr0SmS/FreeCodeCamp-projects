@@ -3,47 +3,47 @@ const {useState, useEffect} = React;
 let padsData = [
     {
         id: "Q",
-        audioSrc: "clap.mp3",
+        audioSrc: "Heater-6.mp3",
         name: "clap"
     },
     {
         id: "W",
-        audioSrc: "close-hh.mp3",
+        audioSrc: "Cev_H2.mp3",
         name: "close hh"
     },
     {
         id: "E",
-        audioSrc: "open-hh.mp3",
+        audioSrc: "Dsc_Oh.mp3",
         name: "open hh"
     },
     {
         id: "A",
-        audioSrc: "heater-1.mp3",
+        audioSrc: "Heater-1.mp3",
         name: "heater 1"
     },
     {
         id: "S",
-        audioSrc: "heater-2.mp3",
+        audioSrc: "Heater-2.mp3",
         name: "heater 2"
     },
     {
         id: "D",
-        audioSrc: "heater-3.mp3",
+        audioSrc: "Heater-3.mp3",
         name: "heater 3"
     },
     {
         id: "Z",
-        audioSrc: "heater-4.mp3",
+        audioSrc: "Heater-4_1.mp3",
         name: "heater 4"
     },
     {
         id: "X",
-        audioSrc: "kick_n_hat.mp3",
+        audioSrc: "Kick_n_Hat.mp3",
         name: "kick 'n hat"
     },
     {
         id: "C",
-        audioSrc: "kick.mp3",
+        audioSrc: "RP4_KICK_1.mp3",
         name: "kick"
     }
 ]
@@ -54,16 +54,15 @@ const Pad = ({onPadClick, id, audioSrc, name}) => {
             className="drum-pad" 
             onPointerDown={onPadClick}
             onTouchStart={onPadClick}
-            name={name}
+            id={name}
         >
             {id}
-            <audio className="clip" id={id}>
-                <source src={`./songs/${audioSrc}`} type="audio/mpeg"/>
+            <audio className="clip" id={id} src={`./songs/${audioSrc}` ? `./songs/${audioSrc}` : `https://s3.amazonaws.com/freecodecamp/drums/${audioSrc}`} type="audio/mpeg">
+                <source src={`./songs/${audioSrc}`} type="audio/mpeg" />
             </audio>
         </div>
     )
 };
-
 
 const App = () => {
 
@@ -86,7 +85,7 @@ const App = () => {
     const handlePadClick = (e) => {
         const pad = e.target;
         e.target.children[0].play();
-        setdisplay(pad.getAttribute('name'));
+        setdisplay(pad.getAttribute('id'));
     };
 
     const pads = padsData.map(p  => {
