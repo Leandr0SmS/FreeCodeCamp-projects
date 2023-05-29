@@ -57,7 +57,7 @@ const Pad = ({onPadClick, id, audioSrc, name}) => {
             id={name}
         >
             {id}
-            <audio className="clip" id={id} src={`./songs/${audioSrc}` ? `./songs/${audioSrc}` : `https://s3.amazonaws.com/freecodecamp/drums/${audioSrc}`} type="audio/mpeg">
+            <audio className="clip" id={id} src={`https://s3.amazonaws.com/freecodecamp/drums/${audioSrc}`} type="audio/mpeg">
                 <source src={`./songs/${audioSrc}`} type="audio/mpeg" />
             </audio>
         </div>
