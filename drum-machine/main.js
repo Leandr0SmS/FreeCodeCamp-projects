@@ -1,4 +1,4 @@
-const {useState} = React;
+const {useState, useEffect} = React;
 
 let padsData = [
     {
@@ -48,12 +48,17 @@ let padsData = [
     }
 ]
 
-const Pad = ({onPadClick, id, audioSrc, name}) => {
+const Pad = ({onPadClick, isAudioPlaying, id, audioSrc, name}) => {
     return (
-        <div className="drum-pad" onMouseDown={onPadClick} name={name}>
+        <div 
+            className="drum-pad" 
+            onPointerDown={onPadClick}
+            onTouchStart={onPadClick}
+            name={name}
+        >
             {id}
             <audio className="clip" id={id}>
-                <source src={`./songs/${audioSrc}`} type="audio/mpeg"/>
+                <source src={`./songs/${audioSrc}`} type="audio/mpeg" autoPlay={isAudioPlaying}/>
             </audio>
         </div>
     )
@@ -62,12 +67,32 @@ const Pad = ({onPadClick, id, audioSrc, name}) => {
 
 const App = () => {
 
-    const [pad, setPad] = useState(null);
+    const [display, setdisplay] = useState(null);
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
+    useEffect(() => {
+
+        const handleKeyDown = (e) => {
+            console.log(e.key);
+            console.log(e.target);
+            const pad = padsData.filter(p => (p.id == e.key.toUpperCase()));
+            if (pad.length == 1) {
+                setdisplay(pad[0].name);
+                setIsAudioPlaying(true)
+            }
+        };
+
+        window.addEventListener('keypress', handleKeyDown);
+        return () => {
+          window.removeEventListener('keypress', handleKeyDown);
+        };
+      }, []);
 
     const handlePadClick = (e) => {
-        console.log(e.target.getAttribute('name'));
+        const pad = e.target;
+        console.log(pad.getAttribute('name'));
         e.target.children[0].play();
-        setPad(e.target.getAttribute('name'));
+        setdisplay(pad.getAttribute('name'));
     };
 
     const pads = padsData.map(p  => {
@@ -75,6 +100,7 @@ const App = () => {
             <Pad
                 key={p.id}
                 onPadClick={handlePadClick}
+                isAudioPlaying={isAudioPlaying}
                 id={p.id}
                 audioSrc={p.audioSrc}
                 name={p.name}
@@ -82,12 +108,12 @@ const App = () => {
         )
     })
 
-    console.log(pad)
+    console.log(isAudioPlaying)
 
     return (
         <div id="drum-machine">
             <div id="display">
-                {pad}
+                {display}
             </div>
             <div className="pads-div">
                 {pads}
