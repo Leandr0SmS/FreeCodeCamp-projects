@@ -84,7 +84,7 @@ const App = () => {
 
     const handlePadClick = (e) => {
         const pad = e.target;
-        e.target.children[0].play();
+        pad.children[0].play();
         setdisplay(pad.getAttribute('id'));
     };
 
