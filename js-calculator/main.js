@@ -1,30 +1,31 @@
 const { createRoot } = ReactDOM;
+const { useState } = React;
 
-const Calculator = () => {
+const Calculator = ({ onNumOprCLick, onAcClick, display }) => {
     return (
         <div id="calculator">
-            <div className="btn" id="display"></div>
-            <div className="btn" id="clear">AC</div>
+            <div id="display">{display}</div>
+            <div className="btn" id="clear" onClick={onAcClick}>AC</div>
             <div id="main">
                 <div id="numbers">
-                    <div className="number btn" id="one">1</div>
-                    <div className="number btn" id="two">2</div>
-                    <div className="number btn" id="three">3</div>
-                    <div className="number btn" id="four">4</div>
-                    <div className="number btn" id="five">5</div>
-                    <div className="number btn" id="six">6</div>
-                    <div className="number btn" id="seven">7</div>
-                    <div className="number btn" id="eigth">8</div>
-                    <div className="number btn" id="nine">9</div>
-                    <div className="number btn" id="zeroZero">00</div>
-                    <div className="number btn" id="zero">0</div>
-                    <div className="number btn" id="decimal">.</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="one">1</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="two">2</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="three">3</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="four">4</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="five">5</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="six">6</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="seven">7</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="eigth">8</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="nine">9</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="zeroZero">00</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="zero">0</div>
+                    <div className="number btn" onClick={onNumOprCLick} id="decimal">.</div>
                 </div>
                 <div id="operators">
-                    <div className="operator btn" id="add">+</div>
-                    <div className="operator btn" id="subtract">-</div>
-                    <div className="operator btn" id="divide">/</div>
-                    <div className="operator btn" id="multiply">x</div>
+                    <div className="operator btn" onClick={onNumOprCLick} id="add">+</div>
+                    <div className="operator btn" onClick={onNumOprCLick} id="subtract">-</div>
+                    <div className="operator btn" onClick={onNumOprCLick} id="divide">/</div>
+                    <div className="operator btn" onClick={onNumOprCLick} id="multiply">x</div>
                 </div>
             </div>
             <div className="btn" id="equals">=</div>
@@ -33,8 +34,26 @@ const Calculator = () => {
 };
 
 const App = () => {
+
+    const [display, setDisplay] = useState([]);
+
+    const handleCLick = (e) => {
+        const value = e.target.childNodes[0].data;
+        setDisplay((d) => [...d, value]);
+    };
+
+    const handleAcClick = () => {
+        setDisplay([])
+    };
+
+    console.log(display)
+
     return (
-        <Calculator/>
+        <Calculator
+            onNumOprCLick={handleCLick}
+            onAcClick={handleAcClick}
+            display={display.join(" ")}
+        />
     )
 };
 

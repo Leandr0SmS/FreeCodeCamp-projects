@@ -32,11 +32,18 @@ body {
     }
 }
 #display {
+    font-family: 'Press Start 2P', cursive;
     background-color: $ash-gray;
     width: 25rem;
     height: 5.5rem;
+    padding: 1rem;
     margin-bottom: 1.5rem;
     border: 0.5rem solid $dim-gray;
+    border-radius: 0.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    text-transform: uppercase;
     grid-column: 1 / -1;
     grid-row: 1 / 4;
 }
