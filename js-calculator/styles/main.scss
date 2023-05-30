@@ -18,33 +18,40 @@ body {
     border-radius: 0.5rem;
     padding: 1.5rem;
     color: $lemon-chiffon;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+.btn {
+    @extend %center-flex;
+    border-radius: 0.2rem;
+    height: 1.5rem;
+    margin: 0.2rem;
 }
 #display {
     background-color: $ash-gray;
-
     width: 10rem;
     height: 2rem;
-
 }
 #clear {
     background-color: $harvest-gold;
-    border-radius: 0.3rem;
+}
+#main {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+#numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+#operators {
+    display: grid;
 }
 .number {
     background-color: $onyx;
-    border-radius: 0.3rem;
-    @extend %center-flex;
-
-    width: 2rem;
-    height: 1.5rem;
-
 }
 .operator {
     background-color: $walnut-brown;
-    border-radius: 0.3rem;
-    @extend %center-flex;
-    width: 2rem;
-    height: 1.5rem;
 }
 #equals {
     background-color: $boston-blue;
