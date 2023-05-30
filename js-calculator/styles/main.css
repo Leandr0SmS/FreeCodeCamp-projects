@@ -33,14 +33,19 @@ body {
 
 .btn {
   border-radius: 0.2rem;
-  height: 1.5rem;
-  margin: 0.2rem;
+  height: 3rem;
+  margin: 0.3rem;
+  font-size: 1.5rem;
+}
+.btn:hover {
+  cursor: pointer;
 }
 
 #display {
   background-color: #afb2a7;
-  width: 10rem;
-  height: 2rem;
+  width: 20rem;
+  height: 4rem;
+  margin-bottom: 2rem;
 }
 
 #clear {

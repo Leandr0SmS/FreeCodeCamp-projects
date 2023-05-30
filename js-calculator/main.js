@@ -16,15 +16,15 @@ const Calculator = () => {
                     <div className="number btn" id="seven">7</div>
                     <div className="number btn" id="eigth">8</div>
                     <div className="number btn" id="nine">9</div>
-                    <div className="number btn" id="zero">0</div>
                     <div className="number btn" id="zeroZero">00</div>
+                    <div className="number btn" id="zero">0</div>
                     <div className="number btn" id="decimal">.</div>
                 </div>
                 <div id="operators">
                     <div className="operator btn" id="add">+</div>
                     <div className="operator btn" id="subtract">-</div>
                     <div className="operator btn" id="divide">/</div>
-                    <div className="operator btn" id="multiply">*</div>
+                    <div className="operator btn" id="multiply">x</div>
                 </div>
             </div>
             <div className="btn" id="equals">=</div>
