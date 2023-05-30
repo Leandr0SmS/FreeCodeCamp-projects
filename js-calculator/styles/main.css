@@ -26,14 +26,13 @@ body {
   border-radius: 0.5rem;
   padding: 1.5rem;
   color: #e4e2b9;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
 }
 
 .btn {
   border-radius: 0.2rem;
-  height: 3rem;
   margin: 0.3rem;
   font-size: 1.5rem;
 }
@@ -43,18 +42,25 @@ body {
 
 #display {
   background-color: #afb2a7;
-  width: 20rem;
-  height: 4rem;
-  margin-bottom: 2rem;
+  width: 25rem;
+  height: 5.5rem;
+  margin-bottom: 1.5rem;
+  border: 0.5rem solid #5f635e;
+  grid-column: 1/-1;
+  grid-row: 1/4;
 }
 
 #clear {
   background-color: #ca9318;
+  grid-column: 10/-1;
+  grid-row: 4/8;
 }
 
 #main {
   display: grid;
   grid-template-columns: 3fr 1fr;
+  grid-column: 1/10;
+  grid-row: 4/-1;
 }
 
 #numbers {
@@ -76,4 +82,6 @@ body {
 
 #equals {
   background-color: #3F91B8;
+  grid-column: 10/-1;
+  grid-row: 8/-1;
 }/*# sourceMappingURL=main.css.map */
