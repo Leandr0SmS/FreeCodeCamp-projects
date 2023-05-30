@@ -9,6 +9,13 @@ $eerie-black: #1F2527ff;
 $lemon-chiffon: #E4E2B9ff;
 $ash-gray: #AFB2A7ff;
 $harvest-gold: #CA9318ff;
+$boston-blue: #3F91B8;
 $white: #FFFFFFff;
 $onyx: #303331ff;
 $walnut-brown: #524B3Fff;
+
+%center-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

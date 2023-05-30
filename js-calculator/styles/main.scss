@@ -10,4 +10,42 @@
 body {
     height: 100%;
     min-height: 100vh;
+    @extend %center-flex;
+}
+#calculator {
+    background-color: $eerie-black;
+    box-shadow: 0rem 1rem 1.875rem -0.625rem $eerie-black;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    color: $lemon-chiffon;
+}
+#display {
+    background-color: $ash-gray;
+
+    width: 10rem;
+    height: 2rem;
+
+}
+#clear {
+    background-color: $harvest-gold;
+    border-radius: 0.3rem;
+}
+.number {
+    background-color: $onyx;
+    border-radius: 0.3rem;
+    @extend %center-flex;
+
+    width: 2rem;
+    height: 1.5rem;
+
+}
+.operator {
+    background-color: $walnut-brown;
+    border-radius: 0.3rem;
+    @extend %center-flex;
+    width: 2rem;
+    height: 1.5rem;
+}
+#equals {
+    background-color: $boston-blue;
 }
