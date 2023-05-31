@@ -1,31 +1,48 @@
+import { numbersData } from "./data/numbers.js";
+import { operatorsData } from "./data/operators.js";
 const { createRoot } = ReactDOM;
 const { useState } = React;
 
 const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
+
+    const numbers = numbersData.map(num => {
+        return (
+            <button 
+                key={num.id}
+                type="button" 
+                className="number btn" 
+                onClick={onNumOprCLick} 
+                id={num.id}
+            >
+                {num.sign}
+            </button>  
+        )
+    });
+
+    const operators = operatorsData.map(opr => {
+        return (
+            <button 
+                key={opr.id}
+                type="button" 
+                className="number btn" 
+                onClick={onNumOprCLick} 
+                id={opr.id}
+            >
+                {opr.sign}
+            </button>  
+        )
+    });
+
     return (
         <div id="calculator">
             <div id="display">{display}</div>
             <button type="button" className="btn" id="clear" onClick={onAcClick}>AC</button>
             <div id="main">
                 <div id="numbers">
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="one">1</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="two">2</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="three">3</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="four">4</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="five">5</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="six">6</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="seven">7</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="eigth">8</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="nine">9</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="zeroZero">00</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="zero">0</button>
-                    <button type="button" className="number btn" onClick={onNumOprCLick} id="decimal">.</button>
+                    {numbers}
                 </div>
                 <div id="operators">
-                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="add">+</button>
-                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="subtract">-</button>
-                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="divide">/</button>
-                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="multiply">x</button>
+                    {operators}
                 </div>
             </div>
             <button type="button" className="btn" id="equals" onClick={onEqualsClick}>=</button>
