@@ -1,34 +1,34 @@
 const { createRoot } = ReactDOM;
 const { useState } = React;
 
-const Calculator = ({ onNumOprCLick, onAcClick, display }) => {
+const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
     return (
         <div id="calculator">
             <div id="display">{display}</div>
-            <div className="btn" id="clear" onClick={onAcClick}>AC</div>
+            <button type="button" className="btn" id="clear" onClick={onAcClick}>AC</button>
             <div id="main">
                 <div id="numbers">
-                    <div className="number btn" onClick={onNumOprCLick} id="one">1</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="two">2</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="three">3</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="four">4</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="five">5</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="six">6</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="seven">7</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="eigth">8</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="nine">9</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="zeroZero">00</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="zero">0</div>
-                    <div className="number btn" onClick={onNumOprCLick} id="decimal">.</div>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="one">1</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="two">2</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="three">3</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="four">4</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="five">5</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="six">6</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="seven">7</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="eigth">8</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="nine">9</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="zeroZero">00</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="zero">0</button>
+                    <button type="button" className="number btn" onClick={onNumOprCLick} id="decimal">.</button>
                 </div>
                 <div id="operators">
-                    <div className="operator btn" onClick={onNumOprCLick} id="add">+</div>
-                    <div className="operator btn" onClick={onNumOprCLick} id="subtract">-</div>
-                    <div className="operator btn" onClick={onNumOprCLick} id="divide">/</div>
-                    <div className="operator btn" onClick={onNumOprCLick} id="multiply">x</div>
+                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="add">+</button>
+                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="subtract">-</button>
+                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="divide">/</button>
+                    <button type="button" className="operator btn" onClick={onNumOprCLick} id="multiply">x</button>
                 </div>
             </div>
-            <div className="btn" id="equals">=</div>
+            <button type="button" className="btn" id="equals" onClick={onEqualsClick}>=</button>
         </div>
     )
 };
@@ -39,12 +39,18 @@ const App = () => {
 
     const handleCLick = (e) => {
         const value = e.target.childNodes[0].data;
-        setDisplay((d) => [...d, value]);
+        value === "."
+        ? setDisplay((d) => [...d, [...d].at(-1).concat(value)])
+        : setDisplay((d) => [...d, value]);
     };
 
     const handleAcClick = () => {
         setDisplay([])
     };
+
+    const handleEqualsClick = (array) => {
+        array.map()
+    }
 
     console.log(display)
 
@@ -52,7 +58,8 @@ const App = () => {
         <Calculator
             onNumOprCLick={handleCLick}
             onAcClick={handleAcClick}
-            display={display.join(" ")}
+            onEqualsClick={() => handleEqualsClick(display)}
+            display={display.lenght >=2 ? display.join("") : display}
         />
     )
 };
