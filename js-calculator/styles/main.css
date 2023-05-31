@@ -49,6 +49,7 @@ body {
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
+  gap: 0.2rem;
   text-transform: uppercase;
   grid-column: 1/-1;
   grid-row: 1/4;
@@ -56,6 +57,7 @@ body {
 
 #formula, #display {
   font-size: 1.2rem;
+  height: 1rem;
   text-align: right;
   font-family: "Press Start 2P", cursive;
 }

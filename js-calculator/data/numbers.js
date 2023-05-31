@@ -4,34 +4,42 @@ export const numbersData = [
         sign: "1"
     },
     {
+
         id: "two",
         sign: "2"
     },
     {
+
         id: "three",
         sign: "3"
     },
     {
+
         id: "four",
         sign: "4"
     },
     {
+
         id: "five",
         sign: "5"
     },
     {
+
         id: "six",
         sign: "6"
     },
     {
+
         id: "seven",
         sign: "7"
     },
     {
+
         id: "eigth",
         sign: "8"
     },
     {
+
         id: "nine",
         sign: "9"
     },

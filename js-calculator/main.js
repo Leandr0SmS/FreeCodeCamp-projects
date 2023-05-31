@@ -3,7 +3,7 @@ import { operatorsData } from "./data/operators.js";
 const { createRoot } = ReactDOM;
 const { useState } = React;
 
-const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
+const Calculator = ({ onNumOprCLick, onAcClick, display, formula, onEqualsClick }) => {
 
     const numbers = numbersData.map(num => {
         return (
@@ -13,6 +13,7 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
                 className="number btn" 
                 onClick={onNumOprCLick} 
                 id={num.id}
+                value={num.sign}
             >
                 {num.sign}
             </button>  
@@ -27,6 +28,7 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
                 className="number btn" 
                 onClick={onNumOprCLick} 
                 id={opr.id}
+                value={opr.sign}
             >
                 {opr.sign}
             </button>  
@@ -36,10 +38,17 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
     return (
         <div id="calculator">
             <div id="screen">
-                <div id="formula">{display}</div>
+                <div id="formula">{formula}</div>
                 <div id="display">{display}</div>
             </div>
-            <button type="button" className="btn" id="clear" onClick={onAcClick}>AC</button>
+            <button 
+                type="button" 
+                className="btn" 
+                id="clear" 
+                onClick={onAcClick}
+            >
+                AC
+            </button>
             <div id="main">
                 <div id="numbers">
                     {numbers}
@@ -48,29 +57,35 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
                     {operators}
                 </div>
             </div>
-            <button type="button" className="btn" id="equals" onClick={onEqualsClick}>=</button>
+            <button 
+                type="button" 
+                className="btn" 
+                id="equals" 
+                onClick={onEqualsClick}
+            >
+                =
+            </button>
         </div>
     )
 };
 
 const App = () => {
 
-    const [display, setDisplay] = useState([0]);
+    const [formula, setFormula] = useState(null);
+    const [display, setDisplay] = useState([]);
 
     const handleCLick = (e) => {
-        const value = e.target.childNodes[0].data;
-        value === "."
-        ? setDisplay((d) => [...d, [...d].at(-1).concat(value)])
-        : setDisplay((d) => [...d, value]);
+        const value = e.target.value;
+        setDisplay((d) => [...d, value]);
     };
 
     const handleAcClick = () => {
-        setDisplay([0])
+        setDisplay([])
     };
 
     const handleEqualsClick = (array) => {
         array.map()
-    }
+    };
 
     console.log(display)
 
@@ -79,7 +94,8 @@ const App = () => {
             onNumOprCLick={handleCLick}
             onAcClick={handleAcClick}
             onEqualsClick={() => handleEqualsClick(display)}
-            display={display.lenght >=2 ? display.join("") : display}
+            display={display.join("")}
+            formula={formula}
         />
     )
 };
