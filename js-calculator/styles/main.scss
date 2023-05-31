@@ -31,21 +31,23 @@ body {
         cursor: pointer;
     }
 }
-#display {
-    font-family: 'Press Start 2P', cursive;
+#screen {
     background-color: $ash-gray;
     width: 25rem;
-    height: 5.5rem;
     padding: 1rem;
     margin-bottom: 1.5rem;
     border: 0.5rem solid $dim-gray;
     border-radius: 0.2rem;
     display: flex;
-    align-items: center;
-    justify-content: right;
+    flex-direction: column;
     text-transform: uppercase;
     grid-column: 1 / -1;
     grid-row: 1 / 4;
+}
+#formula, #display {
+    font-size: 1.2rem;
+    text-align: right;
+    font-family: 'Press Start 2P', cursive;
 }
 #clear {
     background-color: $harvest-gold;

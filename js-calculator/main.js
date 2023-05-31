@@ -35,7 +35,10 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
 
     return (
         <div id="calculator">
-            <div id="display">{display}</div>
+            <div id="screen">
+                <div id="formula">{display}</div>
+                <div id="display">{display}</div>
+            </div>
             <button type="button" className="btn" id="clear" onClick={onAcClick}>AC</button>
             <div id="main">
                 <div id="numbers">
@@ -52,7 +55,7 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, onEqualsClick }) => {
 
 const App = () => {
 
-    const [display, setDisplay] = useState([]);
+    const [display, setDisplay] = useState([0]);
 
     const handleCLick = (e) => {
         const value = e.target.childNodes[0].data;
@@ -62,7 +65,7 @@ const App = () => {
     };
 
     const handleAcClick = () => {
-        setDisplay([])
+        setDisplay([0])
     };
 
     const handleEqualsClick = (array) => {
