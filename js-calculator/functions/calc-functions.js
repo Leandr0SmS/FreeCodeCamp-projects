@@ -15,7 +15,7 @@ const calculator = (prevNum, operator, nextNum) => {
 
 const operatorSelector = (opr, form) => {
     for (let i = 0; i < form.length; i++) {
-        if (form[i] == opr) {
+        if (form[i] === opr) {
           const calculatedValue = calculator(form[i - 1], form[i], form[i + 1]);
           return [...form.slice(0, i -1), calculatedValue, ...form.slice(i + 2)];
         }
