@@ -61,7 +61,8 @@ const Calculator = ({ onNumCLick, onOprCLick, onAcClick, display, formula, onEqu
                 type="button" 
                 className="btn" 
                 id="equals" 
-                onClick={onEqualsClick}
+                value="="
+                onClick={onOprCLick} 
             >
                 =
             </button>
@@ -71,7 +72,7 @@ const Calculator = ({ onNumCLick, onOprCLick, onAcClick, display, formula, onEqu
 
 const App = () => {
 
-    const [formula, setFormula] = useState(null);
+    const [formula, setFormula] = useState([]);
     const [display, setDisplay] = useState([]);
 
     const handleNumberCLick = (e) => {
@@ -89,13 +90,22 @@ const App = () => {
         }
     };
 
-    const handleOperatorClick = () => {
+    const handleOperatorClick = (e) => {
         const operator = e.target.value;
-
+        const displayNumber = Number(display.join(""));
+        setFormula((f) => {
+            return [
+                ...f,
+                displayNumber,
+                operator
+            ]
+        });
+        setDisplay([]);
     };
 
     const handleAcClick = () => {
-        setDisplay([])
+        setDisplay([]);
+        setFormula([]);
     };
 
     const calculator = (prevNum, operator, nextNum) => {
@@ -117,7 +127,9 @@ const App = () => {
         array.map()
     };
 
-    console.log(display)
+    console.log(`display: ${display}`);
+    console.log(`displayNumber: ${Number(display.join(""))}`);
+    console.log(`formula: ${formula}`);
 
     return (
         <Calculator
