@@ -3,7 +3,7 @@ import { operatorsData } from "./data/operators.js";
 const { createRoot } = ReactDOM;
 const { useState } = React;
 
-const Calculator = ({ onNumOprCLick, onAcClick, display, formula, onEqualsClick }) => {
+const Calculator = ({ onNumCLick, onOprCLick, onAcClick, display, formula, onEqualsClick }) => {
 
     const numbers = numbersData.map(num => {
         return (
@@ -11,7 +11,7 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, formula, onEqualsClick 
                 key={num.id}
                 type="button" 
                 className="number btn" 
-                onClick={onNumOprCLick} 
+                onClick={onNumCLick} 
                 id={num.id}
                 value={num.sign}
             >
@@ -26,7 +26,7 @@ const Calculator = ({ onNumOprCLick, onAcClick, display, formula, onEqualsClick 
                 key={opr.id}
                 type="button" 
                 className="number btn" 
-                onClick={onNumOprCLick} 
+                onClick={onOprCLick} 
                 id={opr.id}
                 value={opr.sign}
             >
@@ -74,13 +74,43 @@ const App = () => {
     const [formula, setFormula] = useState(null);
     const [display, setDisplay] = useState([]);
 
-    const handleCLick = (e) => {
+    const handleNumberCLick = (e) => {
         const value = e.target.value;
-        setDisplay((d) => [...d, value]);
+        if (value == ".") {
+            return setDisplay((d) => {
+                if ([...d].indexOf('.') > 0) {
+                    return [...d];
+                }  else {
+                    return [...d, "."];
+                }
+            })
+        } else {
+            return setDisplay((d) => [...d, value]);
+        }
+    };
+
+    const handleOperatorClick = () => {
+        const operator = e.target.value;
+
     };
 
     const handleAcClick = () => {
         setDisplay([])
+    };
+
+    const calculator = (prevNum, operator, nextNum) => {
+        switch (operator) {
+            case "x":
+                return prevNum * nextNum;
+            case "/":
+                return prevNum / nextNum;
+            case "+":
+                return prevNum + nextNum;
+            case "-":
+                return prevNum - nextNum;
+            default:
+                return "not valid operators"
+        }
     };
 
     const handleEqualsClick = (array) => {
@@ -91,7 +121,8 @@ const App = () => {
 
     return (
         <Calculator
-            onNumOprCLick={handleCLick}
+            onNumCLick={handleNumberCLick}
+            onOprCLick={handleOperatorClick}
             onAcClick={handleAcClick}
             onEqualsClick={() => handleEqualsClick(display)}
             display={display.join("")}
