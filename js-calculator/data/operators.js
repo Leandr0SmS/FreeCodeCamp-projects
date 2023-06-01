@@ -13,6 +13,6 @@ export const operatorsData = [
     },
     {
         id: "multiply",
-        sign: "X"
+        sign: "x"
     },
 ]

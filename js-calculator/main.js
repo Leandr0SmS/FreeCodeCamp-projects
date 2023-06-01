@@ -1,5 +1,6 @@
 import { numbersData } from "./data/numbers.js";
 import { operatorsData } from "./data/operators.js";
+import { calculations } from "./functions/calc-functions.js"
 const { createRoot } = ReactDOM;
 const { useState } = React;
 
@@ -62,7 +63,7 @@ const Calculator = ({ onNumCLick, onOprCLick, onAcClick, display, formula, onEqu
                 className="btn" 
                 id="equals" 
                 value="="
-                onClick={onOprCLick} 
+                onClick={onEqualsClick} 
             >
                 =
             </button>
@@ -74,6 +75,13 @@ const App = () => {
 
     const [formula, setFormula] = useState([]);
     const [display, setDisplay] = useState([]);
+
+    let result;
+    if (formula[formula.length - 1] == "=") {
+        result = calculations(formula.slice(0, formula.length - 1));
+        setDisplay(result)
+        setFormula([...formula.slice(0, formula.length - 1)])
+    }
 
     const handleNumberCLick = (e) => {
         const value = e.target.value;
@@ -108,35 +116,12 @@ const App = () => {
         setFormula([]);
     };
 
-    const calculator = (prevNum, operator, nextNum) => {
-        switch (operator) {
-            case "x":
-                return prevNum * nextNum;
-            case "/":
-                return prevNum / nextNum;
-            case "+":
-                return prevNum + nextNum;
-            case "-":
-                return prevNum - nextNum;
-            default:
-                return "not valid operators"
-        }
-    };
-
-    const handleEqualsClick = (array) => {
-        array.map()
-    };
-
-    console.log(`display: ${display}`);
-    console.log(`displayNumber: ${Number(display.join(""))}`);
-    console.log(`formula: ${formula}`);
-
     return (
         <Calculator
             onNumCLick={handleNumberCLick}
             onOprCLick={handleOperatorClick}
             onAcClick={handleAcClick}
-            onEqualsClick={() => handleEqualsClick(display)}
+            onEqualsClick={handleOperatorClick}
             display={display.join("")}
             formula={formula}
         />
