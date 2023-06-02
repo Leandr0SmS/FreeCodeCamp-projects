@@ -95,28 +95,41 @@ const App = () => {
                 }
             })
         } else {
-            setDisplay((d) => [...d, parseFloat(value)]);
+            if (display.length == 1 && display[0] == 0) {
+                setDisplay((d) => [parseFloat(value)]);
+            } else {
+                setDisplay((d) => [...d, parseFloat(value)]);
+            }
         }
     };
 
     const handleOperatorClick = (e) => {
         const operator = e.target.value;
         const displayNumber = parseFloat(display.join(""));
-        setFormula((f) => {
-            if (typeof f[f.length - 1] == "number") {
+        if (operator == "-" && display == 0) {
+            setDisplay((d) => {
                 return [
-                    displayNumber,
-                    operator
+                    "-"
                 ]
-            } else {
-                return [
-                    ...f,
-                    displayNumber,
-                    operator
-                ]
-            }
-        });
-        setDisplay([0]);
+            })
+        } else {
+            setFormula((f) => {
+                //handle result and continue colculation
+                if (typeof f[f.length - 1] == "number") {
+                    return [
+                        displayNumber,
+                        operator
+                    ]
+                } else {
+                    return [
+                        ...f,
+                        displayNumber,
+                        operator
+                    ]
+                }
+            });
+            setDisplay([0]);
+        }
     };
 
     const handleAcClick = () => {
@@ -127,13 +140,14 @@ const App = () => {
     console.log(display)
     console.log(formula)
 
+    let removeZeroDisplay = display.join('')
     return (
         <Calculator
             onNumCLick={handleNumberCLick}
             onOprCLick={handleOperatorClick}
             onAcClick={handleAcClick}
             onEqualsClick={handleOperatorClick}
-            display={parseFloat(display.join(''))}
+            display={display.join('')}
             formula={formula}
         />
     )
