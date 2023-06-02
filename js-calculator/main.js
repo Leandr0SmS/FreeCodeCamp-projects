@@ -76,6 +76,7 @@ const App = () => {
     const [formula, setFormula] = useState([]);
     const [display, setDisplay] = useState([0]);
 
+    //result logic => Handle Equal button
     let result;
     if (formula[formula.length - 1] == "=") {
         result = calculations(formula.slice(0, formula.length - 1));
@@ -102,11 +103,18 @@ const App = () => {
         const operator = e.target.value;
         const displayNumber = parseFloat(display.join(""));
         setFormula((f) => {
-            return [
-                ...f,
-                displayNumber,
-                operator
-            ]
+            if (typeof f[f.length - 1] == "number") {
+                return [
+                    displayNumber,
+                    operator
+                ]
+            } else {
+                return [
+                    ...f,
+                    displayNumber,
+                    operator
+                ]
+            }
         });
         setDisplay([0]);
     };
