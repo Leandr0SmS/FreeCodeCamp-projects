@@ -24,11 +24,15 @@ const operatorSelector = (opr, form) => {
 };
 
 const calculations = (formula) => {
-    const mult = operatorSelector("x", formula);
-    const div = operatorSelector("/", mult);
-    const plus = operatorSelector("+", div);
-    const minus = operatorSelector("-", plus);
-    return minus;
+    if (formula.length <= 1) {
+        return formula
+    } else {
+        const mult = operatorSelector("x", formula);
+        const div = operatorSelector("/", mult);
+        const plus = operatorSelector("+", div);
+        const minus = operatorSelector("-", plus);
+        return calculations(minus);
+    }
 };
 
 export { calculations }

@@ -74,7 +74,7 @@ const Calculator = ({ onNumCLick, onOprCLick, onAcClick, display, formula, onEqu
 const App = () => {
 
     const [formula, setFormula] = useState([]);
-    const [display, setDisplay] = useState([]);
+    const [display, setDisplay] = useState([0]);
 
     let result;
     if (formula[formula.length - 1] == "=") {
@@ -86,7 +86,7 @@ const App = () => {
     const handleNumberCLick = (e) => {
         const value = e.target.value;
         if (value == ".") {
-            return setDisplay((d) => {
+            setDisplay((d) => {
                 if ([...d].indexOf('.') > 0) {
                     return [...d];
                 }  else {
@@ -94,13 +94,13 @@ const App = () => {
                 }
             })
         } else {
-            return setDisplay((d) => [...d, value]);
+            setDisplay((d) => [...d, parseFloat(value)]);
         }
     };
 
     const handleOperatorClick = (e) => {
         const operator = e.target.value;
-        const displayNumber = Number(display.join(""));
+        const displayNumber = parseFloat(display.join(""));
         setFormula((f) => {
             return [
                 ...f,
@@ -108,13 +108,16 @@ const App = () => {
                 operator
             ]
         });
-        setDisplay([]);
+        setDisplay([0]);
     };
 
     const handleAcClick = () => {
-        setDisplay([]);
+        setDisplay([0]);
         setFormula([]);
     };
+
+    console.log(display)
+    console.log(formula)
 
     return (
         <Calculator
@@ -122,7 +125,7 @@ const App = () => {
             onOprCLick={handleOperatorClick}
             onAcClick={handleAcClick}
             onEqualsClick={handleOperatorClick}
-            display={display.join("")}
+            display={parseFloat(display.join(''))}
             formula={formula}
         />
     )
