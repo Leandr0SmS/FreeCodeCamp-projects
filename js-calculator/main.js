@@ -159,9 +159,6 @@ const App = () => {
         setFormula([]);
     };
 
-    console.log(formula)
-    console.log(display)
-
     let removeZeroDisplay = display.join('')
     return (
         <Calculator
