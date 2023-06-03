@@ -35,7 +35,7 @@ export const numbersData = [
     },
     {
 
-        id: "eigth",
+        id: "eight",
         sign: "8"
     },
     {

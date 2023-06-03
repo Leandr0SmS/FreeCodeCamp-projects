@@ -42,7 +42,9 @@ body {
 
 #screen {
   background-color: #afb2a7;
-  width: 25rem;
+  min-width: 25rem;
+  width: -moz-fit-content;
+  width: fit-content;
   padding: 1rem;
   margin-bottom: 1.5rem;
   border: 0.5rem solid #5f635e;

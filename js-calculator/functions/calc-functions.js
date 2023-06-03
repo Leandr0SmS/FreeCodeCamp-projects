@@ -27,11 +27,11 @@ const calculations = (formula) => {
     if (formula.length <= 1) {
         return formula
     } else {
-        const mult = operatorSelector("x", formula);
+        const mult = operatorSelector("x" || "/", formula);
         const div = operatorSelector("/", mult);
-        const plus = operatorSelector("+", div);
-        const minus = operatorSelector("-", plus);
-        return calculations(minus);
+        const minus = operatorSelector("-", div);
+        const plus = operatorSelector("+" || "-", minus);
+        return calculations(plus);
     }
 };
 

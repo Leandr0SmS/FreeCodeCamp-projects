@@ -33,7 +33,8 @@ body {
 }
 #screen {
     background-color: $ash-gray;
-    width: 25rem;
+    min-width: 25rem;
+    width: fit-content;
     padding: 1rem;
     margin-bottom: 1.5rem;
     border: 0.5rem solid $dim-gray;

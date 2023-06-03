@@ -106,12 +106,20 @@ const App = () => {
     const handleOperatorClick = (e) => {
         const operator = e.target.value;
         const displayNumber = parseFloat(display.join(""));
-        if (operator == "-" && display == 0) {
-            setDisplay((d) => {
-                return [
-                    "-"
-                ]
-            })
+        if (display == "0") {
+            if (operator == "-") {
+                setDisplay(["-"])
+            } else {
+                setFormula(f => {
+                    const removeLastItem = [...f];
+                    removeLastItem.pop();
+                    return [
+                        ...removeLastItem,
+                        operator
+                    ]
+                })
+                setDisplay([0]);
+            }
         } else {
             setFormula((f) => {
                 //handle result and continue colculation
@@ -137,8 +145,8 @@ const App = () => {
         setFormula([]);
     };
 
-    console.log(display)
     console.log(formula)
+    console.log(display)
 
     let removeZeroDisplay = display.join('')
     return (
