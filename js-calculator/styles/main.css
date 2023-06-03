@@ -105,4 +105,25 @@ body {
   grid-column: 10/-1;
   grid-row: 8/-1;
   margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  #calculator {
+    box-shadow: 0rem 1rem 1.875rem -0.625rem #1f2527;
+    padding: 1rem;
+  }
+  .btn {
+    font-size: 1.3rem;
+  }
+  .big {
+    margin-left: 0.3rem;
+  }
+  #screen {
+    min-width: 18rem;
+    margin-bottom: 1rem;
+    border: 0.3rem solid #5f635e;
+  }
+  #formula, #display {
+    font-size: 0.9rem;
+  }
 }/*# sourceMappingURL=main.css.map */
