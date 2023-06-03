@@ -106,7 +106,21 @@ const App = () => {
     const handleOperatorClick = (e) => {
         const operator = e.target.value;
         const displayNumber = parseFloat(display.join(""));
-        if (display == "0") {
+        if (display == "-") {
+            if (operator == "-") {
+                setDisplay(["-"])
+            } else {
+                setFormula(f => {
+                    const removeLastItem = [...f];
+                    removeLastItem.pop();
+                    return [
+                        ...removeLastItem,
+                        operator
+                    ]
+                })
+                setDisplay([0]);
+            }
+        } else if (display == "0") {
             if (operator == "-") {
                 setDisplay(["-"])
             } else {
@@ -155,7 +169,7 @@ const App = () => {
             onOprCLick={handleOperatorClick}
             onAcClick={handleAcClick}
             onEqualsClick={handleOperatorClick}
-            display={display.join('')}
+            display={removeZeroDisplay}
             formula={formula}
         />
     )
