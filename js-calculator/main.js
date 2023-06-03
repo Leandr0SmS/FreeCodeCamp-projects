@@ -44,7 +44,7 @@ const Calculator = ({ onNumCLick, onOprCLick, onAcClick, display, formula, onEqu
             </div>
             <button 
                 type="button" 
-                className="btn" 
+                className="btn big" 
                 id="clear" 
                 onClick={onAcClick}
             >
@@ -60,7 +60,7 @@ const Calculator = ({ onNumCLick, onOprCLick, onAcClick, display, formula, onEqu
             </div>
             <button 
                 type="button" 
-                className="btn" 
+                className="btn big" 
                 id="equals" 
                 value="="
                 onClick={onEqualsClick} 

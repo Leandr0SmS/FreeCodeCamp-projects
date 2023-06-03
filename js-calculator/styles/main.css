@@ -40,18 +40,23 @@ body {
   cursor: pointer;
 }
 
+.big {
+  margin: 0;
+  margin-left: 0.5rem;
+}
+
 #screen {
   background-color: #afb2a7;
   min-width: 25rem;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 1rem;
+  padding: 0.5rem;
   margin-bottom: 1.5rem;
   border: 0.5rem solid #5f635e;
   border-radius: 0.2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.5rem;
   text-transform: uppercase;
   grid-column: 1/-1;
   grid-row: 1/4;
@@ -71,6 +76,7 @@ body {
 }
 
 #main {
+  background-color: #90784e;
   display: grid;
   grid-template-columns: 3fr 1fr;
   grid-column: 1/10;
@@ -98,4 +104,5 @@ body {
   background-color: #3F91B8;
   grid-column: 10/-1;
   grid-row: 8/-1;
+  margin-top: 0.5rem;
 }/*# sourceMappingURL=main.css.map */
