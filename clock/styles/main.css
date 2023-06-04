@@ -1,12 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Genos:wght@100;200;400;600;700&family=VT323&display=swap");
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
 * {
   margin: 0;
+  font-family: "Genos", sans-serif;
 }
 
 body {
   height: 100%;
   min-height: 100vh;
+}
+
+p {
+  font-family: "VT323", monospace;
 }/*# sourceMappingURL=main.css.map */
