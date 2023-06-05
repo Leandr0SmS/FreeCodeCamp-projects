@@ -47,3 +47,27 @@ body {
     font-weight: 300;
     padding: 0.5rem 2rem;
 }
+.timer--div {
+    @extend %center--flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+#timer-label {
+    text-align: center;
+    font-size: 2rem;
+}
+#time-left {
+    font-size: 5rem;
+    line-height: 4rem;
+}
+.start--reset {
+    @extend %center--flex;
+    gap: 1rem;
+}
+.start-stop {
+    margin-top: 1rem;
+    font-size: 3rem;
+    &:hover {
+        cursor: pointer;
+    }
+}

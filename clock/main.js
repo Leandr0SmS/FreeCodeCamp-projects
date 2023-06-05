@@ -23,12 +23,21 @@ const Selectors = ({ id, label, selected }) => {
     )
 };
 
-const Timer = ({ number }) => {
+const Timer = ({ label, time_left }) => {
     return (
         <div className="timer--div">
-            <div className="timer">{number}</div>
-            <span className="material-symbols-outlined" id="play_pause">play_pause</span>
-            <span className="material-symbols-outlined">refresh</span>
+            <div className="timer">
+                <h3 id="timer-label">{label}</h3>
+                <h2 id="time-left">{time_left}</h2>
+            </div>
+            <div className="start--reset">
+                <span 
+                    id="start_stop"
+                    className="material-symbols-outlined start-stop" >play_pause</span>
+                <span
+                     id="reset"
+                    className="material-symbols-outlined start-stop" >refresh</span>
+            </div>
         </div>
     )
 };
@@ -41,6 +50,7 @@ const App = () => {
                 <Selectors id="break" label="Break Length" selected={5}/>
                 <Selectors id="session" label="Session Length" selected={25}/>
             </div>
+            <Timer label="session" time_left={"25:00"} />
         </React.Fragment>
     )
 };

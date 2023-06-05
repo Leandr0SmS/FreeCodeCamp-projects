@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Genos:wght@100;200;400;600;700&family=VT323&display=swap");
-.controls, .controls--div, .selectors, .selectors--div, body {
+.start--reset, .timer--div, .controls, .controls--div, .selectors, .selectors--div, body {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,4 +53,31 @@ body {
   font-size: 3rem;
   font-weight: 300;
   padding: 0.5rem 2rem;
+}
+
+.timer--div {
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+#timer-label {
+  text-align: center;
+  font-size: 2rem;
+}
+
+#time-left {
+  font-size: 5rem;
+  line-height: 4rem;
+}
+
+.start--reset {
+  gap: 1rem;
+}
+
+.start-stop {
+  margin-top: 1rem;
+  font-size: 3rem;
+}
+.start-stop:hover {
+  cursor: pointer;
 }/*# sourceMappingURL=main.css.map */
