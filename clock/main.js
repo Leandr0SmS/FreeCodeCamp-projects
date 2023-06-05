@@ -3,13 +3,21 @@ const { createRoot } = ReactDOM;
 const Selectors = ({ id, label, selected }) => {
     return (
         <div className="selectors">
-            <h1 id={id}>{label}</h1>
+            <h3 id={`${id}-label`}>{label}</h3>
             <div className="controls--div">
                 <div className="controls">
-                    <span className="material-symbols-outlined arrow">expand_less</span>
-                    <span className="material-symbols-outlined arrow">expand_more</span>
+                    <span 
+                        id={`${id}-increment`} 
+                        className="material-symbols-outlined arrow">expand_less</span>
+                    <span 
+                        id={`${id}-decrement`}
+                        className="material-symbols-outlined arrow">expand_more</span>
                 </div>
-                <h2 className="number">{selected}</h2>
+                <h2 
+                    id={`${id}-length`}
+                    className="number">
+                        {selected}
+                </h2>
             </div>
         </div>
     )
@@ -28,8 +36,11 @@ const Timer = ({ number }) => {
 const App = () => {
     return (
         <React.Fragment>
-            <Selectors id="break-label" label="Break Length" selected={5}/>
-            <Selectors id="session-label" label="Session Length" selected={25}/>
+            <h1 id="title">25 + 5 Clock</h1>
+            <div className="selectors--div">
+                <Selectors id="break" label="Break Length" selected={5}/>
+                <Selectors id="session" label="Session Length" selected={25}/>
+            </div>
         </React.Fragment>
     )
 };

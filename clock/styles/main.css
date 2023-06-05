@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Genos:wght@100;200;400;600;700&family=VT323&display=swap");
-.controls, .controls--div, body {
+.controls, .controls--div, .selectors, .selectors--div, body {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,8 +20,22 @@ body {
   flex-direction: column;
 }
 
+#root {
+  width: 30rem;
+}
+
 #title {
   font-size: 3rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.selectors--div {
+  gap: 1rem;
+}
+
+.selectors {
+  flex-direction: column;
 }
 
 .controls {
@@ -32,11 +46,11 @@ body {
 }
 
 .arrow {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .number {
-  font-size: 5rem;
+  font-size: 3rem;
   font-weight: 300;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 2rem;
 }/*# sourceMappingURL=main.css.map */
