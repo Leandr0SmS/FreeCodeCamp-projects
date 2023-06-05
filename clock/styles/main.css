@@ -34,6 +34,17 @@ body {
   gap: 1rem;
 }
 
+.btn {
+  background-color: #1d3557;
+  color: #f1faee;
+  border-radius: 0.2rem;
+  border: none;
+}
+.btn:hover {
+  background-color: rgb(101, 131, 149);
+  cursor: pointer;
+}
+
 .selectors {
   flex-direction: column;
 }
@@ -41,18 +52,16 @@ body {
 .controls {
   flex-direction: column;
 }
-.controls:hover {
-  cursor: pointer;
-}
 
 .arrow {
   font-size: 2rem;
+  margin: 1px;
 }
 
 .number {
   font-size: 3rem;
   font-weight: 300;
-  padding: 0.5rem 2rem;
+  padding: 0.5rem 1rem;
 }
 
 .timer--div {

@@ -25,6 +25,16 @@ body {
     @extend %center--flex;
     gap: 1rem;
 }
+.btn {
+    background-color: $berkeley-blue;
+    color: $honeydew;
+    border-radius: 0.2rem;
+    border: none;
+    &:hover {
+        background-color: $cerulean-hover;
+        cursor: pointer;
+    }
+}
 .selectors {
     @extend %center--flex;
     flex-direction: column;
@@ -35,17 +45,15 @@ body {
 .controls {
     @extend %center--flex;
     flex-direction: column;
-    &:hover {
-        cursor: pointer;
-    }
 }
 .arrow {
     font-size: 2rem;
+    margin: 1px;
 }
 .number {
     font-size: 3rem;
     font-weight: 300;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 1rem;
 }
 .timer--div {
     @extend %center--flex;
