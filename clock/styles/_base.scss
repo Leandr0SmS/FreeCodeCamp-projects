@@ -1,3 +1,15 @@
 @import url(
     'https://fonts.googleapis.com/css2?family=Genos:wght@100;200;400;600;700&family=VT323&display=swap'
 );
+
+$red-pantone: #e63946ff;
+$honeydew: #f1faeeff;
+$non-photo-blue: #a8dadcff;
+$cerulean: #457b9dff;
+$berkeley-blue: #1d3557ff;
+
+%center--flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

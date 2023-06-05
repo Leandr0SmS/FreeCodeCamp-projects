@@ -5,12 +5,32 @@
 }
 * {
     margin: 0;
-    font-family: 'Genos', sans-serif;
+    font-family: 'Genos', sans-serif; //'VT323', monospace;
 }
 body {
     height: 100%;
     min-height: 100vh;
+    @extend %center--flex;
+    flex-direction: column;
 }
-p {
-    font-family: 'VT323', monospace;
+#title {
+    font-size: 3rem;
+}
+.controls--div {
+    @extend %center--flex;
+}
+.controls {
+    @extend %center--flex;
+    flex-direction: column;
+    &:hover {
+        cursor: pointer;
+    }
+}
+.arrow {
+    font-size: 3rem;
+}
+.number {
+    font-size: 5rem;
+    font-weight: 300;
+    padding: 0.5rem 3rem;
 }
