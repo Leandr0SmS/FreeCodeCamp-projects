@@ -1,6 +1,7 @@
 import { counter } from "./functions/functions.js";
 const { useState, useEffect } = React;
 const { createRoot } = ReactDOM;
+const audio = document.getElementById("beep");
 
 const Selectors = ({ id, label, selected, onArrowClick }) => {
     return (
@@ -40,6 +41,11 @@ const Timer = ({ label, min_left, sec_left, onStartStopClick, onResetClick }) =>
                     :
                     {sec_left < 10 ? `0${sec_left}` : sec_left}
                 </h2>
+                <audio 
+                    id="beep" 
+                    src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+                    type="audio/wav"
+                ></audio>
             </div>
             <div className="start--reset">
                 <button 
@@ -64,8 +70,6 @@ const App = () => {
     });
     const [timeLeft, setTimeLeft] = useState([]);
     const [timerLabel, setTimeLabel] = useState("Session");
-
-    const audio = new Audio("https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav");
 
     useEffect(() => {
         setTimeLeft([selectorsData.session, 0])
@@ -118,13 +122,15 @@ const App = () => {
     };
 
     const handleResetClick = () => {
+        setStartOn(false);
         setSelectorsData({
             session: 25,
             break: 5
         });
-        setTimeLabel("session")
+        setTimeLabel("Session")
         setTimeLeft([25, 0]);
-        setStartOn(false);
+        audio.pause();
+        audio.currentTime = 0;
     };
 
     useEffect(() => {
@@ -133,12 +139,14 @@ const App = () => {
             nIntervId = setInterval(() => {
                 setTimeLeft(counter(timeLeft[0], timeLeft[1]));
             }, 1000);
-            if (timeLeft.every(num => num < 0)) {
+            if (timeLeft.every(num => num == 0)) {
                 audio.play();
+            }
+            if (timeLeft.every(num => num < 0)) {
                 if (timerLabel === "Session") {
                     setTimeLabel("Break")
                     setTimeLeft([selectorsData.break, 0]);
-                } else {
+                } else if (timerLabel === "Break") {
                     setTimeLabel("Session")
                     setTimeLeft([selectorsData.session, 0]);
                 }
