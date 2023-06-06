@@ -127,7 +127,7 @@ const App = () => {
                 console.log(`${nIntervId} on`);
                 setTimeLeft(counter(timeLeft[0], timeLeft[1]));
             }, 1000);
-            if (timeLeft.every(num => num == 0)) {
+            if (timeLeft.every(num => num < 0)) {
                 if (timerLabel === "Session") {
                     setTimeLabel("Break")
                     setTimeLeft([selectorsData.break, 0]);

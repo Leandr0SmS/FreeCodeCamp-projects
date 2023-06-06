@@ -10,7 +10,7 @@ const counter = (min, sec) => {
         } else if (minLeft > 0 && secLeft == 0) {
             return [(minLeft - 1), 59];
         } else if (minLeft == 0 && secLeft == 0) {
-            return [0, 0];
+            return [-1, -1];
         }
     } else {
         return console.log("Error - invalid time to count")
