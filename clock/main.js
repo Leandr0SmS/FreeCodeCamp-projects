@@ -109,8 +109,20 @@ const App = () => {
     }
 
     useEffect(() => {
-       
-    },[])
+        let nIntervId;
+        if (startOn && !nIntervId) {
+            nIntervId = setInterval(() => {
+                console.log(`${nIntervId} on`);
+                setTimeLeft(counter(timeLeft[0], timeLeft[1]));
+            }, 1000);
+        } else if (!startOn) {
+            console.log(`${nIntervId} stop`)
+            clearInterval(nIntervId);
+            nIntervId = null;
+        }
+        return () => clearInterval(nIntervId);
+
+    },[startOn, timeLeft])
 
     console.log(startOn)
 

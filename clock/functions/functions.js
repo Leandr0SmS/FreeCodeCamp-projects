@@ -6,11 +6,11 @@ const counter = (min, sec) => {
     }
     if (minLeft <= 60 && secLeft < 60) {
         if (secLeft > 0) {
-            return [minLeft, (secLeft - 1)]
+            return [minLeft, (secLeft - 1)];
         } else if (minLeft > 0 && secLeft == 0) {
-            return [(minLeft - 1), 59]
+            return [(minLeft - 1), 59];
         } else if (minLeft == 0 && secLeft == 0) {
-            return [0, 0]
+            return [0, 0];
         }
     } else {
         return console.log("Error - invalid time to count")
