@@ -29,7 +29,7 @@ const Selectors = ({ id, label, selected, onArrowClick }) => {
     )
 };
 
-const Timer = ({ label, min_left, sec_left, onStartStopClick }) => {
+const Timer = ({ label, min_left, sec_left, onStartStopClick, onResetClick }) => {
 
     return (
         <div className="timer--div">
@@ -48,6 +48,7 @@ const Timer = ({ label, min_left, sec_left, onStartStopClick }) => {
                     className="material-symbols-outlined start-stop btn" >play_pause</button>
                 <button
                     id="reset"
+                    onClick={onResetClick}
                     className="material-symbols-outlined start-stop btn" >refresh</button>
             </div>
         </div>
@@ -61,7 +62,7 @@ const App = () => {
         session: 25,
         break: 5
     });
-    const [timeLeft, setTimeLeft] = useState([25, 0]);
+    const [timeLeft, setTimeLeft] = useState([0, 3]);
 
     const handleArrowClick = (e) => {
         const id = e.target.id;
@@ -106,7 +107,12 @@ const App = () => {
 
     const handleStartStopClick = () => {
         setStartOn(s => !s);
-    }
+    };
+
+    const handleResetClick = () => {
+        setTimeLeft([selectorsData.session, 0]);
+        setStartOn(false);
+    };
 
     useEffect(() => {
         let nIntervId;
@@ -115,6 +121,11 @@ const App = () => {
                 console.log(`${nIntervId} on`);
                 setTimeLeft(counter(timeLeft[0], timeLeft[1]));
             }, 1000);
+            if (timeLeft.every(num => num == 0)) {
+                clearInterval(nIntervId);
+                nIntervId = null;
+                setStartOn(false);
+            }
         } else if (!startOn) {
             console.log(`${nIntervId} stop`)
             clearInterval(nIntervId);
@@ -124,7 +135,8 @@ const App = () => {
 
     },[startOn, timeLeft])
 
-    console.log(startOn)
+    console.log(timeLeft)
+    console.log(timeLeft.every(num => num == 0))
 
     return (
         <React.Fragment>
@@ -147,7 +159,8 @@ const App = () => {
                 label="session" 
                 min_left={timeLeft[0]}
                 sec_left={timeLeft[1]}
-                onStartStopClick={handleStartStopClick}    
+                onStartStopClick={handleStartStopClick}
+                onResetClick={handleResetClick}
             />
         </React.Fragment>
     )
