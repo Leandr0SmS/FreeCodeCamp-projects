@@ -65,6 +65,8 @@ const App = () => {
     const [timeLeft, setTimeLeft] = useState([]);
     const [timerLabel, setTimeLabel] = useState("Session");
 
+    const audio = new Audio("https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav");
+
     useEffect(() => {
         setTimeLeft([selectorsData.session, 0])
     },[selectorsData]);
@@ -116,7 +118,12 @@ const App = () => {
     };
 
     const handleResetClick = () => {
-        setTimeLeft([selectorsData.session, 0]);
+        setSelectorsData({
+            session: 25,
+            break: 5
+        });
+        setTimeLabel("session")
+        setTimeLeft([25, 0]);
         setStartOn(false);
     };
 
@@ -124,10 +131,10 @@ const App = () => {
         let nIntervId;
         if (startOn && !nIntervId) {
             nIntervId = setInterval(() => {
-                console.log(`${nIntervId} on`);
                 setTimeLeft(counter(timeLeft[0], timeLeft[1]));
             }, 1000);
             if (timeLeft.every(num => num < 0)) {
+                audio.play();
                 if (timerLabel === "Session") {
                     setTimeLabel("Break")
                     setTimeLeft([selectorsData.break, 0]);
@@ -137,16 +144,12 @@ const App = () => {
                 }
             }
         } else if (!startOn) {
-            console.log(`${nIntervId} stop`)
             clearInterval(nIntervId);
             nIntervId = null;
         }
         return () => clearInterval(nIntervId);
 
     },[startOn, timeLeft]);
-
-    console.log(selectorsData.key)
-    console.log(timeLeft.every(num => num == 0))
 
     return (
         <React.Fragment>
