@@ -1,4 +1,5 @@
-const { useState } = React;
+import { counter } from "./functions/functions.js";
+const { useState, useEffect } = React;
 const { createRoot } = ReactDOM;
 
 const Selectors = ({ id, label, selected, onArrowClick }) => {
@@ -28,16 +29,22 @@ const Selectors = ({ id, label, selected, onArrowClick }) => {
     )
 };
 
-const Timer = ({ label, time_left }) => {
+const Timer = ({ label, min_left, sec_left, onStartStopClick }) => {
+
     return (
         <div className="timer--div">
             <div className="timer">
                 <h3 id="timer-label">{label}</h3>
-                <h2 id="time-left">{time_left}</h2>
+                <h2 id="time-left">
+                    {min_left < 10 ? `0${min_left}` : min_left}
+                    :
+                    {sec_left < 10 ? `0${sec_left}` : sec_left}
+                </h2>
             </div>
             <div className="start--reset">
                 <button 
                     id="start_stop"
+                    onClick={onStartStopClick}
                     className="material-symbols-outlined start-stop btn" >play_pause</button>
                 <button
                     id="reset"
@@ -49,13 +56,14 @@ const Timer = ({ label, time_left }) => {
 
 const App = () => {
 
+    const [startOn, setStartOn] = useState(false);
     const [selectorsData, setSelectorsData] = useState({
         session: 25,
         break: 5
     });
+    const [timeLeft, setTimeLeft] = useState([25, 0]);
 
     const handleArrowClick = (e) => {
-        console.log(e.target.id)
         const id = e.target.id;
         switch (id) {
             case "session-increment":
@@ -96,6 +104,16 @@ const App = () => {
         }
     };
 
+    const handleStartStopClick = () => {
+        setStartOn(s => !s);
+    }
+
+    useEffect(() => {
+       
+    },[])
+
+    console.log(startOn)
+
     return (
         <React.Fragment>
             <h1 id="title">25 + 5 Clock</h1>
@@ -104,16 +122,21 @@ const App = () => {
                     id="break" 
                     label="Break Length" 
                     selected={selectorsData.break}
-                    onArrowClick={handleArrowClick}
+                    onArrowClick={startOn ? undefined : handleArrowClick}
                 />
                 <Selectors 
                     id="session" 
                     label="Session Length" 
                     selected={selectorsData.session}
-                    onArrowClick={handleArrowClick}
+                    onArrowClick={startOn ? undefined : handleArrowClick}
                 />
             </div>
-            <Timer label="session" time_left={"25:00"} />
+            <Timer 
+                label="session" 
+                min_left={timeLeft[0]}
+                sec_left={timeLeft[1]}
+                onStartStopClick={handleStartStopClick}    
+            />
         </React.Fragment>
     )
 };
