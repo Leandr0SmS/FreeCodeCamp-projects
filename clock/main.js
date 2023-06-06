@@ -62,19 +62,25 @@ const App = () => {
         session: 25,
         break: 5
     });
-    const [timeLeft, setTimeLeft] = useState([0, 3]);
+    const [timeLeft, setTimeLeft] = useState([]);
+
+    useEffect(() => {
+        setTimeLeft([selectorsData.session, 0])
+    },[selectorsData]);
 
     const handleArrowClick = (e) => {
         const id = e.target.id;
         switch (id) {
             case "session-increment":
-                return setSelectorsData(s => {
+                setSelectorsData(s => {
                     const newSession = s.session <= 59 ? s.session + 1 : 60;
                     return {
                         ...s,
                         session: newSession,
                     }
                 });
+                setTimeLeft([selectorsData.session, 0])
+                break;
             case "session-decrement":
                 return setSelectorsData(s => {
                     const newSession = s.session >= 1 ? s.session - 1 : 0;
@@ -133,7 +139,7 @@ const App = () => {
         }
         return () => clearInterval(nIntervId);
 
-    },[startOn, timeLeft])
+    },[startOn, timeLeft]);
 
     console.log(timeLeft)
     console.log(timeLeft.every(num => num == 0))
