@@ -63,27 +63,27 @@ const App = () => {
         break: 5
     });
     const [timeLeft, setTimeLeft] = useState([]);
+    const [timerLabel, setTimeLabel] = useState("Session");
 
     useEffect(() => {
         setTimeLeft([selectorsData.session, 0])
     },[selectorsData]);
 
+
     const handleArrowClick = (e) => {
         const id = e.target.id;
         switch (id) {
             case "session-increment":
-                setSelectorsData(s => {
+                return setSelectorsData(s => {
                     const newSession = s.session <= 59 ? s.session + 1 : 60;
                     return {
                         ...s,
                         session: newSession,
                     }
                 });
-                setTimeLeft([selectorsData.session, 0])
-                break;
             case "session-decrement":
                 return setSelectorsData(s => {
-                    const newSession = s.session >= 1 ? s.session - 1 : 0;
+                    const newSession = s.session >= 2 ? s.session - 1 : 1;
                     return {
                         ...s,
                         session: newSession,
@@ -99,7 +99,7 @@ const App = () => {
                 });
             case "break-decrement":
                 return setSelectorsData(s => {
-                    const newBreak = s.break >= 1 ? s.break - 1 : 0;
+                    const newBreak = s.break >= 2 ? s.break - 1 : 1;
                     return {
                         ...s,
                         break: newBreak,
@@ -128,9 +128,13 @@ const App = () => {
                 setTimeLeft(counter(timeLeft[0], timeLeft[1]));
             }, 1000);
             if (timeLeft.every(num => num == 0)) {
-                clearInterval(nIntervId);
-                nIntervId = null;
-                setStartOn(false);
+                if (timerLabel === "Session") {
+                    setTimeLabel("Break")
+                    setTimeLeft([selectorsData.break, 0]);
+                } else {
+                    setTimeLabel("Session")
+                    setTimeLeft([selectorsData.session, 0]);
+                }
             }
         } else if (!startOn) {
             console.log(`${nIntervId} stop`)
@@ -141,7 +145,7 @@ const App = () => {
 
     },[startOn, timeLeft]);
 
-    console.log(timeLeft)
+    console.log(selectorsData.key)
     console.log(timeLeft.every(num => num == 0))
 
     return (
@@ -162,7 +166,7 @@ const App = () => {
                 />
             </div>
             <Timer 
-                label="session" 
+                label={timerLabel} 
                 min_left={timeLeft[0]}
                 sec_left={timeLeft[1]}
                 onStartStopClick={handleStartStopClick}
