@@ -4,27 +4,26 @@ const { useState, useEffect } = React;
 
 const App = () => {
 
-    const [data, setData] = useState("");
+    const [dataGDP, setDataGDP] = useState("");
 
     const w = 500;
     const h = 500;
 
     useEffect(() => {
-
         fetch("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json")
             .then(res => res.json())
             .then(data => {
-            setData(data.data)
-    }).then(() => {
-        
-        d3Code();
-
+            setDataGDP(data.data)
     })
-
-
     }, []);
 
-    console.log(data)
+    useEffect(() => {
+
+        d3Code(dataGDP);
+
+    }, [dataGDP])
+
+    console.log(dataGDP)
 
     return (
         <div id='app'>
