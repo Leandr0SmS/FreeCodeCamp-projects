@@ -1,25 +1,53 @@
 export const d3Code = (data) => { 
 
-    const w = 500;
-    const h = 500;
+    const w = 80;
+    const h = 80;
 
-    const dataTest = [12, 31, 22, 17, 25, 18, 29, 14, 9]
+    const xScale = d3.scaleLinear()
+                     .domain(
+                        [
+                            d3.min(data, (d) => d[0]).split('-')[0],
+                            d3.max(data, (d) => d[0]).split('-')[0]
+                        ]
+                     )
+                     .range(
+                        [
+                            0, w
+                        ]
+                     );
+
+    const yScale = d3.scaleLinear()
+                     .domain(
+                        [
+                            d3.min(data, (d) => d[1]),
+                            d3.max(data, (d) => d[1])
+                        ]
+                     )
+                     .range(
+                        [
+                            h,
+                            0
+                        ]
+                     );
 
     const svg = d3.select('#app')
     .append('svg')
-    .attr('width', w)
-    .attr('height', h)
+    .attr('width', `${w}vw`)
+    .attr('height', `${w}vh`)
 
-    console.log(data)
+    console.log(d3.min(data, (d) => d[1])) // y
+    console.log(d3.max(data, (d) => d[1])) // y
+    console.log(d3.min(data, (d) => d[0])) // x
+    console.log(d3.max(data, (d) => d[0]).split('-')[0]) // x
 
     svg.selectAll('rect')
     .data(data)
     .enter()
     .append('rect')
     .attr('x', (d, i) => i * 3)
-    .attr('y', (d, i) => h - d[1])
-    .attr('width', 25)
-    .attr('height', (d, i) => d[1])
+    .attr('y', (d, i) => yScale(h - d[1]))
+    .attr('width', d => w / data.length)
+    .attr('height', (d, i) => yScale(d[1]))
     .style('fill', 'navy')
     .style('margin', '2px')
 
