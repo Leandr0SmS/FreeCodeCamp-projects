@@ -19,7 +19,9 @@ const App = () => {
 
     useEffect(() => {
 
-        d3Code(dataGDP);
+        if (dataGDP) {
+            d3Code(dataGDP);
+        }
 
     }, [dataGDP])
 

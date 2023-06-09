@@ -13,13 +13,13 @@ export const d3Code = (data) => {
     console.log(data)
 
     svg.selectAll('rect')
-    .data(dataTest)
+    .data(data)
     .enter()
     .append('rect')
     .attr('x', (d, i) => i * 3)
-    .attr('y', (d, i) => h - 3 * d)
+    .attr('y', (d, i) => h - d[1])
     .attr('width', 25)
-    .attr('height', (d, i) => 3 * d)
+    .attr('height', (d, i) => d[1])
     .style('fill', 'navy')
     .style('margin', '2px')
 
