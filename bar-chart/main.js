@@ -32,10 +32,10 @@ const App = () => {
     useEffect(() => {
 
         if (dataGDP) {
-            d3Code(dataGDP);
+            d3Code(dataGDP, 500, 500);
         }
 
-    }, [dataGDP, width, height])
+    }, [dataGDP])
 
     return (
         <div id='app'>
