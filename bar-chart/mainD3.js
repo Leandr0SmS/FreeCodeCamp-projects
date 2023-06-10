@@ -1,7 +1,5 @@
 export const d3Code = (data, width, height) => { 
 
-    console.log([width, height])
-
     const w = width;
     const h = height;
     const padding = 40;
@@ -37,9 +35,8 @@ export const d3Code = (data, width, height) => {
         .append('svg')
         .attr('width', w)
         .attr('height', h)
-        .style('margin', '3rem')
+        .attr('class', 'svg')
 
-    console.log(data.length)//true
     console.log(d3.min(data, (d) => d[1])) // y
     console.log(d3.max(data, (d) => d[1])) // y
     console.log(d3.min(data, (d) => d[0]).split('-')[0]) // x
@@ -54,17 +51,21 @@ export const d3Code = (data, width, height) => {
         .attr('width', d => (w / data.length) / 2)
         .attr('height', (d, i) => (h - yScale(d[1])) - padding)
         .attr('id', d => `${d[1]}`)
-        .style('fill', 'navy')
+        .attr('class', 'bar')
+        .attr('data-date', d => d[0])
+        .attr('data-gdp', d => d[1])
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
 
     svg.append("g")
-       .attr("transform", "translate(0," + (h - padding) + ")")
-       .call(xAxis);
+        .attr('id', 'x-axis')
+        .attr("transform", "translate(0," + (h - padding) + ")")
+        .call(xAxis);
     
     svg.append("g")
-       .attr("transform", "translate(" + padding + ", 0)")
-       .call(yAxis);
+        .attr('id', 'y-axis')
+        .attr("transform", "translate(" + padding + ", 0)")
+        .call(yAxis);
 
 }

@@ -8,3 +8,22 @@ body {
     height: 100%;
     min-height: 100vh;
 }
+.app {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.svg {
+    margin: 3rem;
+}
+#title {
+    margin: 2rem;
+    text-align: center;
+}
+.bar{
+    fill: navy;
+    &:hover {
+        fill: white;
+    }
+}
