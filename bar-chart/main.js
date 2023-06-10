@@ -32,7 +32,7 @@ const App = () => {
     useEffect(() => {
 
         if (dataGDP) {
-            d3Code(dataGDP, 500, 500);
+            d3Code(dataGDP, 900, 500);
         }
 
     }, [dataGDP])
