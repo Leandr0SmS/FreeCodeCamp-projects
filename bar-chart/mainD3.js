@@ -4,6 +4,7 @@ export const d3Code = (data, width, height) => {
     const h = height;
     const barWidth = width / 275;
     const padding = 40;
+    console.log(width * 0.3)
 
     const dataQ = data.map(elem => {
         if (elem[0].split('-')[1] === "01") {
@@ -76,13 +77,13 @@ export const d3Code = (data, width, height) => {
         .attr('class', 'bar')
         .attr('data-date', d => d[0])
         .attr('data-gdp', d => d[1])
-        .on('mouseover', function (event, d) {
-
-          const i = data.indexOf(event);
+        .on('mouseover', function (event, i) {
 
           tooltip
             .transition()
-            .duration(200)
+            .duration(20)
+            .style('left', (i * barWidth) + 'px')
+            .style('top', height + 'px')
             .style('opacity', 0.9);
           tooltip
             .html(

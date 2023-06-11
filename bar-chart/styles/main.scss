@@ -30,7 +30,11 @@ body {
 #tooltip {
     position: absolute;
     min-height: 3rem;
-    width: 7rem;
-    top: 0;
-    left: 0;
+    width: fit-content;
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    opacity: 0;
+    border-radius: 0.2rem;
+    box-shadow: 3px 2px 1rem 1px rgba(0,0,0,0.25);
 }

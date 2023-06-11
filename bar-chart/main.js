@@ -5,22 +5,7 @@ const { useState, useEffect } = React;
 const App = () => {
 
     const [dataGDP, setDataGDP] = useState("");
-    const [width, setWidth] = useState(window.innerWidth);
-    const [height, setHeight] = useState(window.innerHeight);
     
-    const handleResize = () => {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
-    };
-      
-    useEffect(() => {
-      window.addEventListener('resize', handleResize);
-    
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }, []);
-
     useEffect(() => {
         fetch("https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json")
             .then(res => res.json())
@@ -30,11 +15,10 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-
+        let displayWidth = window.innerWidth * 0.8
         if (dataGDP) {
-            d3Code(dataGDP, 900, 500);
+            d3Code(dataGDP, displayWidth, 500);
         }
-
     }, [dataGDP])
 
     return (
