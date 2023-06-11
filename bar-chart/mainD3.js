@@ -4,11 +4,33 @@ export const d3Code = (data, width, height) => {
     const h = height;
     const padding = 40;
 
-    const xScale = d3.scaleLinear()
+    const dataQ = data.map(elem => {
+        if (elem[0].split('-')[1] === "01") {
+            return [elem[0].split('-')[0], 'Q1', elem[1]]
+        }
+        if (elem[0].split('-')[1] === "04") {
+            return [elem[0].split('-')[0], 'Q2', elem[1]]
+        }
+        if (elem[0].split('-')[1] === "07") {
+            return [elem[0].split('-')[0], 'Q3', elem[1]]
+        }
+        if (elem[0].split('-')[1] === "10") {
+            return [elem[0].split('-')[0], 'Q4', elem[1]]
+        }
+    });
+
+    const yearsDate = data.map(function (item) {
+        return new Date(item[0]);
+    });
+
+    const xMax = new Date(d3.max(yearsDate));
+    xMax.setMonth(xMax.getMonth() + 3);
+
+    var xScale = d3.scaleTime()
                      .domain(
                         [
-                            0,
-                            data.length
+                            d3.min(yearsDate), 
+                            xMax
                         ]
                      )
                      .range(
@@ -37,6 +59,8 @@ export const d3Code = (data, width, height) => {
         .attr('height', h)
         .attr('class', 'svg')
 
+
+    console.log(d3.min(data, (d) => d[0]))
     console.log(d3.min(data, (d) => d[1])) // y
     console.log(d3.max(data, (d) => d[1])) // y
     console.log(d3.min(data, (d) => d[0]).split('-')[0]) // x
@@ -46,7 +70,7 @@ export const d3Code = (data, width, height) => {
         .data(data)
         .enter()
         .append('rect')
-        .attr('x', (d, i) => xScale(i))
+        .attr('x', (d, i) => xScale(yearsDate[i]))
         .attr('y', (d, i) => yScale(d[1]))
         .attr('width', d => (w / data.length) / 2)
         .attr('height', (d, i) => (h - yScale(d[1])) - padding)
