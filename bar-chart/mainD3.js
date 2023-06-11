@@ -62,7 +62,7 @@ export const d3Code = (data, width, height) => {
 
     const tooltip = d3.select('#container')
                       .append('div')
-                      .attr('id', 'tolltip')
+                      .attr('id', 'tooltip')
 
     svg.selectAll('rect')
         .data(data)
@@ -77,8 +77,6 @@ export const d3Code = (data, width, height) => {
         .attr('data-date', d => d[0])
         .attr('data-gdp', d => d[1])
         .on('mouseover', function (event, d) {
-          // d or datum is the height of the
-          // current rect
 
           const i = data.indexOf(event);
 
@@ -89,15 +87,15 @@ export const d3Code = (data, width, height) => {
           tooltip
             .html(
                 dataQ[i][0] + ' ' +dataQ[i][1] +
-                '<br>' +
-                '$' +
-                dataQ[i][2] +
-                ' Billion'
+                '<br>' + '$' + dataQ[i][2] +' Billion'
             )
             .attr('data-date', data[i][0])
         })
         .on('mouseout', function () {
-            tooltip.transition().duration(200).style('opacity', 0);
+            tooltip
+                .transition()
+                .duration(200)
+                .style('opacity', 0);
         });
         
 
