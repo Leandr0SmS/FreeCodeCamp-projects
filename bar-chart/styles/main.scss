@@ -14,8 +14,8 @@ body {
     align-items: center;
     justify-content: center;
 }
-.svg {
-    margin: 3rem;
+#container {
+    position: relative;
 }
 #title {
     margin: 2rem;
@@ -26,4 +26,11 @@ body {
     &:hover {
         fill: white;
     }
+}
+#tooltip {
+    position: absolute;
+    min-height: 3rem;
+    width: 7rem;
+    top: 0;
+    left: 0;
 }

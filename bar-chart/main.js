@@ -40,6 +40,7 @@ const App = () => {
     return (
         <div id='app'>
             <h1 id="title">United States GDP</h1>
+            <div id="container"></div>
         </div>
     )
 }

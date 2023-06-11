@@ -2,6 +2,7 @@ export const d3Code = (data, width, height) => {
 
     const w = width;
     const h = height;
+    const barWidth = width / 275;
     const padding = 40;
 
     const dataQ = data.map(elem => {
@@ -53,18 +54,15 @@ export const d3Code = (data, width, height) => {
                         ]
                      );
 
-    const svg = d3.select('#app')
+    const svg = d3.select('#container')
         .append('svg')
         .attr('width', w)
         .attr('height', h)
         .attr('class', 'svg')
 
-
-    console.log(d3.min(data, (d) => d[0]))
-    console.log(d3.min(data, (d) => d[1])) // y
-    console.log(d3.max(data, (d) => d[1])) // y
-    console.log(d3.min(data, (d) => d[0]).split('-')[0]) // x
-    console.log(d3.max(data, (d) => d[0]).split('-')[0]) // x
+    const tooltip = d3.select('#container')
+                      .append('div')
+                      .attr('id', 'tolltip')
 
     svg.selectAll('rect')
         .data(data)
@@ -72,12 +70,36 @@ export const d3Code = (data, width, height) => {
         .append('rect')
         .attr('x', (d, i) => xScale(yearsDate[i]))
         .attr('y', (d, i) => yScale(d[1]))
-        .attr('width', d => (w / data.length) / 2)
+        .attr('width', d => barWidth)
         .attr('height', (d, i) => (h - yScale(d[1])) - padding)
         .attr('id', d => `${d[1]}`)
         .attr('class', 'bar')
         .attr('data-date', d => d[0])
         .attr('data-gdp', d => d[1])
+        .on('mouseover', function (event, d) {
+          // d or datum is the height of the
+          // current rect
+
+          const i = data.indexOf(event);
+
+          tooltip
+            .transition()
+            .duration(200)
+            .style('opacity', 0.9);
+          tooltip
+            .html(
+                dataQ[i][0] + ' ' +dataQ[i][1] +
+                '<br>' +
+                '$' +
+                dataQ[i][2] +
+                ' Billion'
+            )
+            .attr('data-date', data[i][0])
+        })
+        .on('mouseout', function () {
+            tooltip.transition().duration(200).style('opacity', 0);
+        });
+        
 
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
@@ -91,5 +113,6 @@ export const d3Code = (data, width, height) => {
         .attr('id', 'y-axis')
         .attr("transform", "translate(" + padding + ", 0)")
         .call(yAxis);
+
 
 }
