@@ -4,7 +4,6 @@ export const d3Code = (data, width, height) => {
     const h = height;
     const barWidth = width / 275;
     const padding = 40;
-    console.log(width * 0.3)
 
     const dataQ = data.map(elem => {
         if (elem[0].split('-')[1] === "01") {
@@ -28,7 +27,7 @@ export const d3Code = (data, width, height) => {
     const xMax = new Date(d3.max(yearsDate));
     xMax.setMonth(xMax.getMonth() + 3);
 
-    var xScale = d3.scaleTime()
+    const xScale = d3.scaleTime()
                      .domain(
                         [
                             d3.min(yearsDate), 
