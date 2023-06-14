@@ -7,22 +7,32 @@ export const renderD3 = (data, width, height) => {
     const svg = d3.select('#container')
     .append('svg')
     .attr('width', w)
-    .attr('hieght', h)
+    .attr('height', h)
+
+    const years = data.map(d => {
+        return d.Year = new Date(d.Year, 0, 1); 
+    });
 
     const xScale = d3.scaleTime()
                      .domain([
-                        d3.min(data, d => d['Year']),
-                        d3.max(data, d => d['Year'])
+                        new Date(93, 0, 1),
+                        d3.max(years)
                      ])
                      .range([
                         padding,
                         (w - padding)
-                     ]);
+                     ])
+                     .nice();
 
-    const yScale = d3.scaleLinear()
+    const times = data.map(d => {
+        const [minutes, seconds] = d.Time.split(":");
+        return new Date(0, 0, 0, 0, minutes, seconds)
+    });
+
+    const yScale = d3.scaleTime()
                      .domain([
-                        d3.min(data, d => d['Time']),
-                        d3.max(data, d => d['Time'])
+                        d3.min(times),
+                        d3.max(times)
                      ])
                      .range([
                         (h - padding),
@@ -30,8 +40,17 @@ export const renderD3 = (data, width, height) => {
                      ])
 
     const xAxis = d3.axisBottom(xScale);
+
     const yAxis = d3.axisLeft(yScale);
-        svg.append("g")
+    yAxis.ticks(13)
+        .tickFormat(function(d) {
+            const sec = d.getSeconds();
+            let displaySec = sec < 10 ? '0' + sec : sec;
+            const min = d.getMinutes();
+            return min + ':' + displaySec
+        });
+    
+    svg.append("g")
         .attr('id', 'x-axis')
         .attr("transform", "translate(0," + (h - padding) + ")")
         .call(xAxis);
@@ -42,6 +61,7 @@ export const renderD3 = (data, width, height) => {
         .call(yAxis);
 
     console.log(Object.keys(data[0]))
-    console.log(d3.max(data, d => d['Time']))
-    console.log(d3.min(data, d => d['Time']))
+    console.log(d3.min(data, d => d['Time']), d3.max(data, d => d['Time']))
+    console.log(times)
+    console.log(data)
 } 
