@@ -16,6 +16,11 @@ body {
 }
 
 #container {
+  position: relative;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+#tooltip {
+  position: absolute;
 }/*# sourceMappingURL=main.css.map */
