@@ -1,3 +1,5 @@
+import { generateNewColor } from "./functions/random-color.js";
+
 export const renderD3 = (data, width, height) => {
 
     const w = width;
@@ -7,7 +9,45 @@ export const renderD3 = (data, width, height) => {
     const svg = d3.select('#container')
     .append('svg')
     .attr('width', w)
-    .attr('height', h)
+    .attr('height', h);
+
+    const countries =  [...new Set(data.map(d => d.Nationality))];
+
+    let colorsMap = new Map();
+    countries.forEach(c => {
+        colorsMap.set(c, generateNewColor());
+    })
+
+    svg.selectAll("text")
+        .data(countries)
+        .enter()
+        .append("text")
+        .attr("x", w / 5 * 4)
+        .attr("y", (d, i) => padding + (i * 25))
+        .text(d =>`${d}`)
+        .attr("class","legend")
+
+    svg.selectAll("rect")
+        .data(countries)
+        .enter()
+        .append("rect")
+        .attr("x", (w / 5 * 4) - 20)
+        .attr("y", (d, i) => (padding + (i * 25)) - 13)
+        .attr('width', '1rem')
+        .attr('height', '1rem')
+        .text(d =>`${d}`)
+        .attr("class","legend-color")
+        .style('fill', (d, i) => {
+            if (colorsMap.has(d)) {
+                return colorsMap.get(d)
+            }
+        })
+
+    svg.append('text')
+        .attr("x", (w / 5 * 4) - 20)
+        .attr("y", padding - 20)
+        .text("LEGENDS:")
+        .attr("id", "legend")
 
     const years = data.map(d => {
         return d.Year = new Date(d.Year, 0, 1); 
@@ -15,7 +55,7 @@ export const renderD3 = (data, width, height) => {
 
     const xScale = d3.scaleTime()
                      .domain([
-                        new Date(93, 0, 1),
+                        d3.min(years),
                         d3.max(years)
                      ])
                      .range([
@@ -31,8 +71,8 @@ export const renderD3 = (data, width, height) => {
 
     const yScale = d3.scaleTime()
                      .domain([
-                        d3.min(times),
-                        d3.max(times)
+                        d3.max(times),
+                        d3.min(times)
                      ])
                      .range([
                         (h - padding),
@@ -42,12 +82,10 @@ export const renderD3 = (data, width, height) => {
     const xAxis = d3.axisBottom(xScale);
 
     const yAxis = d3.axisLeft(yScale);
-    yAxis.ticks(13)
+    yAxis.ticks()
         .tickFormat(d => {
-            const sec = d.getSeconds();
-            let displaySec = sec < 10 ? '0' + sec : sec;
-            const min = d.getMinutes();
-            return min + ':' + displaySec
+            const timeString = d.toLocaleTimeString([], { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            return timeString.substr(3);
         });
     
     svg.append("g")
@@ -66,19 +104,16 @@ export const renderD3 = (data, width, height) => {
         .append('circle')
         .attr('cx', (d, i) => xScale(years[i]))
         .attr('cy', (d, i) => yScale(times[i]))
-        .attr('r', '5px')
+        .attr('r', '7px')
         .attr('class', 'dot')
-        .attr('data-xvalue', (d, i) => {
-            const time = times[i]
-            const sec = time.getSeconds();
-            let displaySec = sec < 10 ? '0' + sec : sec;
-            const min = time.getMinutes();
-            return min + ':' + displaySec
+        .attr('data-xvalue', (d, i) => years[i].getFullYear())
+        .attr('data-yvalue', (d, i) => {
+            times[i].setFullYear(1990)
+            return times[i]
         })
-        .attr('data-yvalue', (d, i) => times[i])
+        .attr('fill', (d) => colorsMap.get(d.Nationality))
 
-    console.log(Object.keys(data[0]))
-    console.log(d3.min(data, d => d['Time']), d3.max(data, d => d['Time']))
-    console.log(times)
-    console.log(data)
+        console.log(colorsMap)
+        console.log(data)
+    
 } 
