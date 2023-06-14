@@ -43,7 +43,7 @@ export const renderD3 = (data, width, height) => {
 
     const yAxis = d3.axisLeft(yScale);
     yAxis.ticks(13)
-        .tickFormat(function(d) {
+        .tickFormat(d => {
             const sec = d.getSeconds();
             let displaySec = sec < 10 ? '0' + sec : sec;
             const min = d.getMinutes();
@@ -59,6 +59,23 @@ export const renderD3 = (data, width, height) => {
         .attr('id', 'y-axis')
         .attr("transform", "translate(" + padding + ", 0)")
         .call(yAxis);
+
+    svg.selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+        .attr('cx', (d, i) => xScale(years[i]))
+        .attr('cy', (d, i) => yScale(times[i]))
+        .attr('r', '5px')
+        .attr('class', 'dot')
+        .attr('data-xvalue', (d, i) => {
+            const time = times[i]
+            const sec = time.getSeconds();
+            let displaySec = sec < 10 ? '0' + sec : sec;
+            const min = time.getMinutes();
+            return min + ':' + displaySec
+        })
+        .attr('data-yvalue', (d, i) => times[i])
 
     console.log(Object.keys(data[0]))
     console.log(d3.min(data, d => d['Time']), d3.max(data, d => d['Time']))
