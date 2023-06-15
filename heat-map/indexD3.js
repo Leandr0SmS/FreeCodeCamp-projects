@@ -7,6 +7,7 @@ export const renderD3 = (data, width, height) => {
     const w = width;
     const h = height;
     const padding = 60;
+    const cellHeight = (h - padding) / 12;
 
     d3.select('#app')
         .append('h1')
@@ -29,11 +30,13 @@ export const renderD3 = (data, width, height) => {
             date: new Date(year, month, 1)
         }
     });
+    let yearsMax = d3.max(monthlyVarianceDates, d => d.date.getFullYear());
+    let yearsMin = d3.min(monthlyVarianceDates, d => d.date.getFullYear());
 
-    const xScale = d3.scaleTime()
+    const xScale = d3.scaleLinear()
                      .domain([
-                        d3.min(monthlyVarianceDates, d => d.date),
-                        d3.max(monthlyVarianceDates, d => d.date)
+                        yearsMin,
+                        yearsMax
                      ])
                      .range([
                         padding,
@@ -50,10 +53,11 @@ export const renderD3 = (data, width, height) => {
                         padding
                      ]);
     
-    const xAxis = d3.axisBottom(xScale)
-        .ticks(27)
-        .tickFormat(d => d.getFullYear());
-
+    const xAxis = d3.axisBottom(xScale);
+    xAxis
+        .ticks(26)
+        .tickFormat(d => d)
+        
     const yAxis = d3.axisLeft(yScale)
         .tickFormat(d => monthsSwitch(d));
 
@@ -67,7 +71,31 @@ export const renderD3 = (data, width, height) => {
         .attr("transform", "translate(" + padding + ", 0)")
         .call(yAxis);
 
-    console.log(d3.min(monthlyVarianceDates, d => d.date.getFullYear()))
-    console.log(d3.max(monthlyVarianceDates, d => d.date.getFullYear()))
+    const cellWidth = (w - padding) / (yearsMax - yearsMin);
 
+    svg.selectAll('rect')
+        .data(monthlyVarianceDates)
+        .enter()
+        .append('rect')
+        .attr('data-month', d => d.month)
+        .attr('data-year', d => d.year)
+        .attr('data-temp', d => data.baseTemperature + d.variance)
+        .attr('x', d => xScale(d.date.getFullYear()))
+        .attr('y',(d, i) => yScale(d.date.getMonth()) - cellHeight)
+        .attr('width', cellWidth)
+        .attr('height', (d, i) => cellHeight)
+        .attr('class', 'cell')
+
+    svg.append('rect')
+    .attr('width', '2px')
+    .attr('height', (h - padding) / 12)
+    .attr('x', 60)
+    .attr('y', (h - padding) - cellHeight)
+    .style('fill', 'red')
+
+
+        console.log(xScale(monthlyVarianceDates[0].date.getFullYear()))
+        console.log(yScale(monthlyVarianceDates[0].date.getMonth()))
+
+        console.log(cellWidth)
 };

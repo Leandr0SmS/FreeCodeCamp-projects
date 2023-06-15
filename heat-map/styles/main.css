@@ -17,4 +17,11 @@ body {
 
 #title {
   text-align: center;
+}
+
+.cell {
+  cursor: pointer;
+}
+.cell:hover {
+  fill: white;
 }/*# sourceMappingURL=main.css.map */
