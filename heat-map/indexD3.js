@@ -9,11 +9,6 @@ export const renderD3 = (data, width, height) => {
     const padding = 60;
     const cellHeight = (h - padding) / 12;
 
-    d3.select('#app')
-        .append('h1')
-        .text('Monthly Global Land-Surface Temperature')
-        .attr('id', 'title');
-
     const container = d3.select('#app')
         .append('div')
         .attr('id', 'container');
@@ -97,5 +92,5 @@ export const renderD3 = (data, width, height) => {
         console.log(xScale(monthlyVarianceDates[0].date.getFullYear()))
         console.log(yScale(monthlyVarianceDates[0].date.getMonth()))
 
-        console.log(cellWidth)
+        console.log(data)
 };

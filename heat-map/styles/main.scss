@@ -12,8 +12,9 @@ body {
     align-items: center;
     justify-content: center;
 }
-#title {
+#title, #description {
     text-align: center;
+    margin: 1rem;
 }
 .cell {
     cursor: pointer;

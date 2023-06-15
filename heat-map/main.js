@@ -2,6 +2,15 @@ import { renderD3 } from "./indexD3.js";
 const { createRoot } = ReactDOM;
 const { useState, useEffect } = React;
 
+const Header = ({ subtitle }) => {
+    return (
+        <React.Fragment>
+            <h1 id="title">Monthly Global Land-Surface Temperature</h1>
+            <h3 id="description">{subtitle}</h3>
+        </React.Fragment>
+    )
+};
+
 const App = () => {
 
     const [data, setData] = useState("");
@@ -23,6 +32,7 @@ const App = () => {
 
     return (
         <div id='app'>
+            <Header subtitle={data ? `Base Temperature: ${data.baseTemperature}℃` : 'Loading...'} />
         </div>
     )
 }
