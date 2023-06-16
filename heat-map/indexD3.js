@@ -129,12 +129,15 @@ export const renderD3 = (data, width, height) => {
         .tickValues(ticksValuesArray)
         .tickFormat(d => parseFloat(d).toFixed(1));
 
-    svg.append("g")
+    const legend = svg.append('svg')
+        .attr('id', 'legend')
+
+    legend.append("g")
         .attr('id', 'x-axis')
         .attr('id', 'legend')
         .call(xAxisLegend);
 
-    svg.selectAll('.color')
+    legend.selectAll('.color')
         .data(temperatureColors)
         .enter()
         .append('rect')
