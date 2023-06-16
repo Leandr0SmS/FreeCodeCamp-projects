@@ -1,4 +1,5 @@
-import { monthsSwitch } from "./functions/months.js";
+import { monthsSwitch } from "./resources/months.js";
+import { temperatureColors } from "./resources/colors.js";
 
 export const renderD3 = (data, width, height) => {
 
@@ -25,33 +26,34 @@ export const renderD3 = (data, width, height) => {
             date: new Date(year, month, 1)
         }
     });
+
     let yearsMax = d3.max(monthlyVarianceDates, d => d.date.getFullYear());
     let yearsMin = d3.min(monthlyVarianceDates, d => d.date.getFullYear());
 
     const xScale = d3.scaleLinear()
-                     .domain([
-                        yearsMin,
-                        yearsMax
-                     ])
-                     .range([
-                        padding,
-                        (w - padding)
-                     ]);
+        .domain([
+           yearsMin,
+           yearsMax
+        ])
+        .range([
+           padding,
+           (w - padding)
+        ]);
     
     const yScale = d3.scaleLinear()
-                     .domain([
-                        d3.min(monthlyVarianceDates, d => d.date.getMonth()),
-                        d3.max(monthlyVarianceDates, d => d.date.getMonth())
-                     ])
-                     .range([
-                        (h - padding),
-                        padding
-                     ]);
+        .domain([
+           d3.min(monthlyVarianceDates, d => d.date.getMonth()),
+           d3.max(monthlyVarianceDates, d => d.date.getMonth())
+        ])
+        .range([
+           (h - padding),
+           padding
+        ]);
     
     const xAxis = d3.axisBottom(xScale);
     xAxis
         .ticks(26)
-        .tickFormat(d => d)
+        .tickFormat(d => d);
         
     const yAxis = d3.axisLeft(yScale)
         .tickFormat(d => monthsSwitch(d));
@@ -68,7 +70,7 @@ export const renderD3 = (data, width, height) => {
 
     const cellWidth = (w - padding) / (yearsMax - yearsMin);
 
-    svg.selectAll('rect')
+    const cells = svg.selectAll('.cell')
         .data(monthlyVarianceDates)
         .enter()
         .append('rect')
@@ -79,18 +81,73 @@ export const renderD3 = (data, width, height) => {
         .attr('y',(d, i) => yScale(d.date.getMonth()) - cellHeight)
         .attr('width', cellWidth)
         .attr('height', (d, i) => cellHeight)
-        .attr('class', 'cell')
+        .attr('class', 'cell');
 
-    svg.append('rect')
-    .attr('width', '2px')
-    .attr('height', (h - padding) / 12)
-    .attr('x', 60)
-    .attr('y', (h - padding) - cellHeight)
-    .style('fill', 'red')
+    const legendPadding = padding * 4;
 
+    const variancesMin = d3.min(monthlyVarianceDates, d => d.variance);
+    
+    const variancesMax = d3.max(monthlyVarianceDates, d => d.variance);
 
-        console.log(xScale(monthlyVarianceDates[0].date.getFullYear()))
-        console.log(yScale(monthlyVarianceDates[0].date.getMonth()))
+    const xScaleLegend = d3.scaleLinear()
+        .domain([
+           variancesMin,
+           variancesMax
+        ])
+        .range([
+            legendPadding,
+           (w - legendPadding)
+        ]);
 
-        console.log(data)
+    const scaleColors = d3.scaleLinear()
+        .domain([
+            0,
+            temperatureColors.length
+        ])
+        .range([
+            variancesMin,
+            variancesMax
+        ]);
+
+    const setColors = d3.scaleLinear()
+        .domain([
+            variancesMin,
+            variancesMax
+        ])
+        .range([
+            0,
+            temperatureColors.length
+        ]);
+
+    const ticksValuesArray = [];
+    for (let i = 0; i < temperatureColors.length; i ++) {
+        ticksValuesArray.push(scaleColors(i))
+    }
+    
+    const xAxisLegend = d3.axisBottom(xScaleLegend);
+    xAxisLegend
+        .tickValues(ticksValuesArray)
+        .tickFormat(d => parseFloat(d).toFixed(1));
+
+    svg.append("g")
+        .attr('id', 'x-axis')
+        .attr('id', 'legend')
+        .call(xAxisLegend);
+
+    svg.selectAll('.color')
+        .data(temperatureColors)
+        .enter()
+        .append('rect')
+        .attr('x', (d, i) => xScaleLegend(scaleColors(i)))
+        .attr('y', '0px')
+        .attr('width', (w - 2 * legendPadding) / temperatureColors.length)
+        .attr('height', '7px')
+        .attr('class', 'color')
+        .attr('fill', (d, i) => temperatureColors[i]);
+
+    cells.attr('fill', (d, i) => {
+        const index = Math.round(setColors(d.variance));
+        return temperatureColors[index];
+    })
+
 };
