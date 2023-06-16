@@ -102,7 +102,7 @@ export const renderD3 = (data, width, height) => {
     const scaleColors = d3.scaleLinear()
         .domain([
             0,
-            temperatureColors.length
+            temperatureColors.length - 1
         ])
         .range([
             variancesMin,
@@ -116,7 +116,7 @@ export const renderD3 = (data, width, height) => {
         ])
         .range([
             0,
-            temperatureColors.length
+            temperatureColors.length - 1
         ]);
 
     const ticksValuesArray = [];
@@ -130,7 +130,7 @@ export const renderD3 = (data, width, height) => {
         .tickFormat(d => parseFloat(d).toFixed(1));
 
     const legend = svg.append('svg')
-        .attr('id', 'legend')
+        .attr('id', 'legend');  
 
     legend.append("g")
         .attr('id', 'x-axis')
@@ -143,7 +143,7 @@ export const renderD3 = (data, width, height) => {
         .append('rect')
         .attr('x', (d, i) => xScaleLegend(scaleColors(i)))
         .attr('y', '0px')
-        .attr('width', (w - 2 * legendPadding) / temperatureColors.length)
+        .attr('width', xScaleLegend(scaleColors(1)) - xScaleLegend(scaleColors(0)))
         .attr('height', '7px')
         .attr('class', 'color')
         .attr('fill', (d, i) => temperatureColors[i]);
@@ -151,6 +151,10 @@ export const renderD3 = (data, width, height) => {
     cells.attr('fill', (d, i) => {
         const index = Math.round(setColors(d.variance));
         return temperatureColors[index];
-    })
+    }); 
+
+    console.log(xScaleLegend(scaleColors(0)))
+    console.log(xScaleLegend(scaleColors(1)))
+    console.log((w - 2 * legendPadding))
 
 };

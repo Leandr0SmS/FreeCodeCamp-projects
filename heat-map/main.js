@@ -33,6 +33,9 @@ const App = () => {
     return (
         <div id='app'>
             <Header subtitle={data ? `Base Temperature: ${data.baseTemperature}℃` : 'Loading...'} />
+            <div id='tooltip'>
+                
+            </div>
         </div>
     )
 }
