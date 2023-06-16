@@ -10,9 +10,7 @@ export const renderD3 = (data, width, height) => {
     const padding = 60;
     const cellHeight = (h - padding) / 12;
 
-    const container = d3.select('#app')
-        .append('div')
-        .attr('id', 'container');
+    const container = d3.select('#container')
     
     const svg = container.append('svg')
         .attr('width', w)
@@ -65,7 +63,7 @@ export const renderD3 = (data, width, height) => {
 
     svg.append("g")
         .attr('id', 'y-axis')
-        .attr("transform", "translate(" + padding + ", 0)")
+        .attr("transform", "translate(" + (padding - 1)  + ", 0)")
         .call(yAxis);
 
     const cellWidth = (w - padding) / (yearsMax - yearsMin);
@@ -135,15 +133,18 @@ export const renderD3 = (data, width, height) => {
     legend.append("g")
         .attr('id', 'x-axis')
         .attr('id', 'legend')
+        .attr("transform", "translate(0, 3)")
         .call(xAxisLegend);
+
+    const colorWidth = xScaleLegend(scaleColors(1)) - xScaleLegend(scaleColors(0));
 
     legend.selectAll('.color')
         .data(temperatureColors)
         .enter()
         .append('rect')
-        .attr('x', (d, i) => xScaleLegend(scaleColors(i)))
+        .attr('x', (d, i) => xScaleLegend(scaleColors(i)) - (colorWidth / 2))
         .attr('y', '0px')
-        .attr('width', xScaleLegend(scaleColors(1)) - xScaleLegend(scaleColors(0)))
+        .attr('width', colorWidth)
         .attr('height', '7px')
         .attr('class', 'color')
         .attr('fill', (d, i) => temperatureColors[i]);
@@ -152,9 +153,5 @@ export const renderD3 = (data, width, height) => {
         const index = Math.round(setColors(d.variance));
         return temperatureColors[index];
     }); 
-
-    console.log(xScaleLegend(scaleColors(0)))
-    console.log(xScaleLegend(scaleColors(1)))
-    console.log((w - 2 * legendPadding))
 
 };

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,700;1,100&display=swap");
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -13,11 +14,17 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: "Kanit", sans-serif;
 }
 
-#title, #description {
+#title, #description, #legendText {
   text-align: center;
   margin: 1rem;
+}
+
+#description, #legendText {
+  font-weight: 100;
+  margin-top: 0;
 }
 
 .cell {

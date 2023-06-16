@@ -33,8 +33,10 @@ const App = () => {
     return (
         <div id='app'>
             <Header subtitle={data ? `Base Temperature: ${data.baseTemperature}℃` : 'Loading...'} />
+            <div id="container" >
+                    <p id="legendText">Base Temperature Difference</p>
+                </div>
             <div id='tooltip'>
-                
             </div>
         </div>
     )
