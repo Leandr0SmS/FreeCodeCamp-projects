@@ -10,7 +10,7 @@ export const renderD3 = (data, width, height) => {
     const padding = 60;
     const cellHeight = (h - padding) / 12;
 
-    const container = d3.select('#container')
+    const container = d3.select('#container');
     
     const svg = container.append('svg')
         .attr('width', w)
@@ -120,7 +120,7 @@ export const renderD3 = (data, width, height) => {
     const ticksValuesArray = [];
     for (let i = 0; i < temperatureColors.length; i ++) {
         ticksValuesArray.push(scaleColors(i))
-    }
+    };
     
     const xAxisLegend = d3.axisBottom(xScaleLegend);
     xAxisLegend
@@ -138,6 +138,10 @@ export const renderD3 = (data, width, height) => {
 
     const colorWidth = xScaleLegend(scaleColors(1)) - xScaleLegend(scaleColors(0));
 
+    const tooltip = d3.select('#tooltip');
+
+    tooltip.style('visibility', 'hidden');
+
     legend.selectAll('.color')
         .data(temperatureColors)
         .enter()
@@ -149,9 +153,24 @@ export const renderD3 = (data, width, height) => {
         .attr('class', 'color')
         .attr('fill', (d, i) => temperatureColors[i]);
 
-    cells.attr('fill', (d, i) => {
-        const index = Math.round(setColors(d.variance));
-        return temperatureColors[index];
-    }); 
+    cells
+        .attr('fill', (d, i) => {
+            const index = Math.round(setColors(d.variance));
+            return temperatureColors[index];
+        })
+        .on('mouseenter', (e, d) => {
+            const [x, y] = d3.pointer(e);
+            console.log(d)
+            tooltip.style('visibility', 'visible')
+                .style('top', y + "px")
+                .style("left", (x + padding) + "px")
+                .attr('data-year', `${d.date.getFullYear()}`)
+                .html(`<p>Year: ${d.date.getFullYear()}</p>
+                        <p>Month: ${d.date.getMonth()}</p>
+                        <p>Variance: ${d.variance}</p>`)
+        })
+        .on('mouseleave', (e, d) => {
+            tooltip.style('visibility', 'hidden')
+        });
 
 };

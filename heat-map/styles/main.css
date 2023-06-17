@@ -32,4 +32,17 @@ body {
 }
 .cell:hover {
   fill: white;
+}
+
+#container {
+  position: relative;
+}
+
+#tooltip {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 0.5rem;
+  background-color: white;
+  font-size: 0.8em;
 }/*# sourceMappingURL=main.css.map */
