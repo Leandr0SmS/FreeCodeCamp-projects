@@ -20,7 +20,7 @@ main {
     display: block;
     position: absolute;
     margin-left: 20%;
-    padding-left: 3%;
+    padding-left: 10%;
     margin-bottom: 110px;
 }
 
@@ -65,7 +65,7 @@ a {
 
 #projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(40%, 45%));
+    grid-template-columns: repeat(2, 40%);
     grid-gap: 2rem;
     width: 100%;
     max-width: 1280px;
@@ -85,13 +85,13 @@ a {
 }
 
 .project-title {
-    font-size: 2rem;
-    padding: 2rem 0.5rem;
+    font-size: 1.3em;
+    padding: 1rem 0.5rem;
     text-align: center;
 }
 
 .project-image {
-    height: calc(100% - 6rem);
+    height: calc(100% - 4rem);
     width: 100%;
     object-fit: cover;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
