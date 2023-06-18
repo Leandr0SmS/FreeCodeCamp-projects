@@ -24,9 +24,9 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        let displayWidth = window.innerWidth * 0.8
+        const displayWidth = window.innerWidth;
         if (educationData && countyData) {
-            renderD3([educationData, countyData], displayWidth, 500);
+            renderD3([educationData, countyData], displayWidth, 700);
         }
     }, [educationData, countyData])
 
