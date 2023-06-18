@@ -32,9 +32,9 @@ const App = () => {
 
     return (
         <div id='app'>
+            <h1 id="title">United States Educational Attainment</h1>
+            <h3 id="description">Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)</h3>
             <div id="container" >
-                <h1 id="title">United States Educational Attainment</h1>
-                <h3 id="description">Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)</h3>
                 <div id="tooltip"></div>
             </div>
         </div>
