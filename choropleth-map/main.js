@@ -24,7 +24,7 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        const displayWidth = window.innerWidth;
+        const displayWidth = window.innerWidth * 0.8;
         if (educationData && countyData) {
             renderD3([educationData, countyData], displayWidth, 700);
         }
@@ -33,7 +33,9 @@ const App = () => {
     return (
         <div id='app'>
             <div id="container" >
-                <div id='tooltip'></div>
+                <h1 id="title">United States Educational Attainment</h1>
+                <h3 id="description">Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)</h3>
+                <div id="tooltip"></div>
             </div>
         </div>
     )
