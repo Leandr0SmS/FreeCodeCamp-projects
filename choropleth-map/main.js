@@ -2,6 +2,14 @@ import { renderD3 } from "./indexD3.js";
 const { createRoot } = ReactDOM;
 const { useState, useEffect } = React;
 
+const Container = () => {
+    return (
+        <div id="container" >
+            <div id="tooltip"></div>
+        </div>
+    )
+};
+
 const App = () => {
 
     const [educationData, setEducationData] = useState("");
@@ -26,7 +34,8 @@ const App = () => {
     useEffect(() => {
         const displayWidth = window.innerWidth * 0.8;
         if (educationData && countyData) {
-            renderD3([educationData, countyData], displayWidth, 700);
+            const maxWidth = displayWidth > 960 ? 960 : displayWidth;
+            renderD3([educationData, countyData], maxWidth, 700);
         }
     }, [educationData, countyData])
 
@@ -34,9 +43,9 @@ const App = () => {
         <div id='app'>
             <h1 id="title">United States Educational Attainment</h1>
             <h3 id="description">Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)</h3>
-            <div id="container" >
-                <div id="tooltip"></div>
-            </div>
+            {educationData && countyData
+            ? <Container/>
+            : <h1 id="loader">Loading...</h1>}
         </div>
     )
 }

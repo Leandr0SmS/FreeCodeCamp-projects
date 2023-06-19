@@ -12,7 +12,7 @@ export const renderD3 = (data, width, height) => {
     const svg = container.append('svg')
         .attr('width', w)
         .attr('height', h)
-        .attr('class', 'svg');
+        .attr('id', 'svg');
 
     const geoJsonCountyData = topojson.feature(countyData, countyData.objects.counties);
 
@@ -53,7 +53,7 @@ export const renderD3 = (data, width, height) => {
             educationColors.length - 1
         ]);
 
-    const xScaleColorEducation = d3.scaleLinear()
+    const scaleColorEducation = d3.scaleLinear()
         .domain([
             0,
             educationColors.length - 1
@@ -65,7 +65,7 @@ export const renderD3 = (data, width, height) => {
 
     const ticksValuesArray = [];
         for (let i = 0; i < educationColors.length; i ++) {
-            ticksValuesArray.push(xScaleColorEducation(i))
+            ticksValuesArray.push(scaleColorEducation(i))
         };
 
     const xAxisLegend = d3.axisBottom(xScaleLegendAxis)
@@ -78,7 +78,7 @@ export const renderD3 = (data, width, height) => {
     legend.append("g")
         .attr('id', 'x-axis')
         .attr('id', 'legend')
-        .attr("transform", "translate(0, 3)")
+        .attr('transform', 'translate(0, 3)')
         .call(xAxisLegend);
 
         const tooltip = d3.select('#tooltip')
@@ -113,21 +113,17 @@ export const renderD3 = (data, width, height) => {
             tooltip.style('visibility', 'hidden');
         });
 
-    const colorWidth = xScaleLegendAxis(xScaleColorEducation(1)) - xScaleLegendAxis(xScaleColorEducation(0));
+    const colorWidth = xScaleLegendAxis(scaleColorEducation(1)) - xScaleLegendAxis(scaleColorEducation(0));
 
     legend
         .selectAll('rect')
         .data(educationColors)
         .join('rect')
-        .attr('x', (d, i) => xScaleLegendAxis(xScaleColorEducation(i)))
+        .attr('x', (d, i) => xScaleLegendAxis(scaleColorEducation(i)))
         .attr('y', '-1px')
         .attr('width', colorWidth)
         .attr('height', '7px')
         .attr('class', 'color')
         .attr('fill', (d, i) => d);
-
-    console.log(xScaleColorEducation(1))
-
-    console.log(xScaleLegendAxis(xScaleColorEducation(0)))
 
 };
