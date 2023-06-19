@@ -33,19 +33,44 @@ export const renderD3 = (data, width, height) => {
 
     const legendPadding = width * 0.3;
 
-    const xScaleLegend = d3.scaleLinear()
+    const xScaleLegendAxis = d3.scaleLinear()
         .domain([
             d3.min(educationData, d => d.bachelorsOrHigher),
             d3.max(educationData, d => d.bachelorsOrHigher)
         ])
         .range([
             legendPadding,
-           (w - legendPadding)
+            (w - legendPadding)
         ]);
 
-    const xAxisLegend = d3.axisBottom(xScaleLegend)
-        .ticks()
-        .tickFormat(d => `${d}%`);
+    const scaleEducationColor = d3.scaleLinear()
+        .domain([
+            d3.min(educationData, d => d.bachelorsOrHigher),
+            d3.max(educationData, d => d.bachelorsOrHigher)
+        ])
+        .range([
+            0,
+            educationColors.length - 1
+        ]);
+
+    const xScaleColorEducation = d3.scaleLinear()
+        .domain([
+            0,
+            educationColors.length - 1
+        ])
+        .range([
+            d3.min(educationData, d => d.bachelorsOrHigher),
+            d3.max(educationData, d => d.bachelorsOrHigher)
+        ]);
+
+    const ticksValuesArray = [];
+        for (let i = 0; i < educationColors.length; i ++) {
+            ticksValuesArray.push(xScaleColorEducation(i))
+        };
+
+    const xAxisLegend = d3.axisBottom(xScaleLegendAxis)
+        .tickValues(ticksValuesArray)
+        .tickFormat(d => `${parseFloat(d).toFixed(1)}%`);
         
     const legend = svg.append('svg')
         .attr('id', 'legend');  
@@ -56,23 +81,13 @@ export const renderD3 = (data, width, height) => {
         .attr("transform", "translate(0, 3)")
         .call(xAxisLegend);
 
-    const ScaleColor = d3.scaleLinear()
-        .domain([
-            d3.min(educationData, d => d.bachelorsOrHigher),
-            d3.max(educationData, d => d.bachelorsOrHigher)
-        ])
-        .range([
-            0,
-            educationColors.length - 1
-        ]);
-
         const tooltip = d3.select('#tooltip')
         .style('visibility', 'hidden');
 
     county
         .attr('fill', d => {
             const eduData = educationData.find(obj => obj.fips === d.id);
-            const index = Math.round(ScaleColor(eduData.bachelorsOrHigher));
+            const index = Math.round(scaleEducationColor(eduData.bachelorsOrHigher));
             return educationColors[index];
         })
         .on('mouseenter', (e, d) => {
@@ -92,35 +107,27 @@ export const renderD3 = (data, width, height) => {
         })
         .on('mouseleave', (e, d) => {
             const showData = educationData.find(obj => obj.fips === d.id);
-            const index = Math.round(ScaleColor(showData.bachelorsOrHigher));
+            const index = Math.round(scaleEducationColor(showData.bachelorsOrHigher));
             d3.select(e.target)
                 .style('fill', `${educationColors[index]}`);
             tooltip.style('visibility', 'hidden');
         });
 
-    const xScaleColorAxis = d3.scaleLinear()
-        .domain([
-            0,
-            educationColors.length - 1
-        ])
-        .range([
-            d3.min(educationData, d => d.bachelorsOrHigher),
-            d3.max(educationData, d => d.bachelorsOrHigher)
-        ]);
-
-    const colorWidth = xScaleLegend(xScaleColorAxis(1)) - xScaleLegend(xScaleColorAxis(0));
+    const colorWidth = xScaleLegendAxis(xScaleColorEducation(1)) - xScaleLegendAxis(xScaleColorEducation(0));
 
     legend
         .selectAll('rect')
         .data(educationColors)
         .join('rect')
-        .attr('x', (d, i) => xScaleLegend(xScaleColorAxis(i)))
-        .attr('y', '2px')
+        .attr('x', (d, i) => xScaleLegendAxis(xScaleColorEducation(i)))
+        .attr('y', '-1px')
         .attr('width', colorWidth)
         .attr('height', '7px')
         .attr('class', 'color')
         .attr('fill', (d, i) => d);
 
-    console.log(Math.round(ScaleColor(15)))
+    console.log(xScaleColorEducation(1))
+
+    console.log(xScaleLegendAxis(xScaleColorEducation(0)))
 
 };
