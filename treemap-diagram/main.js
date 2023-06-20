@@ -4,40 +4,26 @@ import { datasets } from './resources/datasets.js';
 const { createRoot } = ReactDOM;
 const { useState, useEffect } = React;
 
-const Header = ({array, onListClick}) => {
-    const list = array.map((elem, i) => {
-        return (
-            <div 
-                key={i}
-                id={elem.id}
-                onClick={onListClick}
-                className="list"
-            >{elem.title}</div>
-        )
-    })
-    return (
-        <nav className="nav">
-            {list}
-        </nav>
-    )
-};
-
 const TabSwitcher = ({ data, renderContent }) => {
     const tabIds = data.map(e => e.id);
     const [selectedId, setSelectedId] = useState(tabIds[0]);
     return (
       <>
-        {tabIds.map((tabId) => (
-          <button
-            key={tabId}
-            onClick={() => setSelectedId(tabId)}
-          >
-            {tabId}
-          </button>
-        ))}
+        <header id="header">
+            {tabIds.map((tabId) => (
+                <button
+                    className="btn"
+                    type="button"
+                    key={tabId}
+                    onClick={() => setSelectedId(tabId)}
+                >
+                    {tabId}
+                </button>
+            ))}
+        </header>
         <hr />
         <div key={selectedId}>
-          {renderContent(selectedId, data)}
+            {renderContent(selectedId, data)}
         </div>
       </>
     );
@@ -59,7 +45,10 @@ const DataVisualization = ({ url, title, subtitle, id }) => {
         }
     }, [data, id]);
     return (
-        <div id={id}>
+        <div 
+            className="content"
+            id={id}
+        >
             <h1 id="title">{title}</h1>
             <h3 id="description">{subtitle}</h3>
             <div id="tooltip"></div>
@@ -68,12 +57,6 @@ const DataVisualization = ({ url, title, subtitle, id }) => {
 };
 
 const App = () => {
-
-    const [toggle, setToggle] = useState('');
-
-    const handleListClick = (e) => {
-        setToggle(e.target.id)
-    };
 
     return (
         <React.Fragment>
