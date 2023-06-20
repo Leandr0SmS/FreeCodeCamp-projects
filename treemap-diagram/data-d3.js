@@ -1,3 +1,7 @@
-export const renderD3 = (data, width, height) => {
-    console.log(data)
+export const renderD3 = (data, id, width, height) => {
+
+    const title = d3.select(`#${id}`)
+        .append('h1')
+        .text(`#${id}`)
+
 }
