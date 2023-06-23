@@ -61,4 +61,8 @@ body {
 
 .tile:hover {
   cursor: pointer;
+}
+
+.tile-text {
+  font-size: 55%;
 }/*# sourceMappingURL=main.css.map */

@@ -35,11 +35,10 @@ export const videoD3 = (data, id, width, height) => {
     
     const block = svg.selectAll('g')
         .data(tilesData)
-        .enter()
-        .append('g')
+        .join('g')
         .attr('transform', d => 'translate (' + d['x0'] + ', ' + d['y0'] +')')
 
-    block.append('rect')
+    const tile = block.append('rect')
         .attr('class', 'tile')
         .attr('fill', d => {
             const index = categoriesNoRepeated.indexOf(d['data']['category']);
@@ -50,7 +49,7 @@ export const videoD3 = (data, id, width, height) => {
         .attr('data-name', d => d.data.name)
         .attr('data-category', d => d.data.category)
         .attr('data-value', d => d.data.value)
-        .on('mouseenter', (e, d) => {
+        .on('mousemove', (e, d) => {
             console.log(d)
             tooltip
                 .style('visibility', 'visible')
@@ -68,5 +67,15 @@ export const videoD3 = (data, id, width, height) => {
             d3.select(e.target).style('opacity', 1);
             tooltip.style('visibility', 'hidden');
         });
+
+    block
+        .append('text')
+        .attr('class', 'tile-text')
+        .selectAll('tspan')
+        .data(d => d.data.name.split(/(?=[A-Z][^A-Z])/g))
+        .join('tspan')
+        .attr('x', 4)
+        .attr('y', (d, i) => 13 + i * 10)
+        .text(d => d);
 
 };
