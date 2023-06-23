@@ -1,4 +1,4 @@
-import { renderD3 } from "./data-d3.js";
+import { renderD3 } from "./d3/main-d3.js";
 import { datasets } from './resources/datasets.js';
 
 const { createRoot } = ReactDOM;
@@ -45,14 +45,16 @@ const DataVisualization = ({ url, title, subtitle, id }) => {
         }
     }, [data, id]);
     return (
-        <div 
-            className="content"
-            id={id}
-        >
+        <React.Fragment>
             <h1 id="title">{title}</h1>
             <h3 id="description">{subtitle}</h3>
-            <div id="tooltip"></div>
-        </div>
+            <div 
+                className="content"
+                id={id}
+            >
+                <div id="tooltip"></div>
+            </div>
+        </React.Fragment>
     )
 };
 

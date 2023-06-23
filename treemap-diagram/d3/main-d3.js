@@ -21,7 +21,4 @@ export const renderD3 = (data, id, width, height) => {
             break;
     }
 
-    
-
-
 }
