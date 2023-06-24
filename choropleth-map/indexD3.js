@@ -81,7 +81,7 @@ export const renderD3 = (data, width, height) => {
         .attr('transform', 'translate(0, 3)')
         .call(xAxisLegend);
 
-        const tooltip = d3.select('#tooltip')
+    const tooltip = d3.select('#tooltip')
         .style('visibility', 'hidden');
 
     county
