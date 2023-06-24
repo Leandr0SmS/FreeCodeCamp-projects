@@ -3,7 +3,7 @@
 
 ## Description
 
-This repo is for learning purpose and contains some projects I did in FreeCodeCamp courses.
+This repo is for learning purpose and contains some projects of FreeCodeCamp courses.
 
 
 ## Help
