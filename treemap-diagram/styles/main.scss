@@ -4,14 +4,17 @@
 * {
     margin: 0;
 }
+%felx-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 body {
     height: 100%;
     min-height: 100vh;
 }
 #header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @extend %felx-center;
 }
 .btn {
     min-width: 8rem;
@@ -28,10 +31,8 @@ body {
 }
 .content {
     position: relative;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @extend %felx-center;
     margin-top: 1rem;
 }
 #tooltip {
@@ -52,7 +53,7 @@ body {
 .svg, .legend-container {
     margin-bottom: 1rem;
 }
-.legend-container {
+#legend {
     padding: 1rem;
 }
 .tile {

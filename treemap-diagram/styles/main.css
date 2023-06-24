@@ -6,15 +6,15 @@
   margin: 0;
 }
 
-body {
-  height: 100%;
-  min-height: 100vh;
-}
-
-#header {
+.content, #header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+body {
+  height: 100%;
+  min-height: 100vh;
 }
 
 .btn {
@@ -33,10 +33,7 @@ body {
 
 .content {
   position: relative;
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-top: 1rem;
 }
 
@@ -62,7 +59,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.legend-container {
+#legend {
   padding: 1rem;
 }
 

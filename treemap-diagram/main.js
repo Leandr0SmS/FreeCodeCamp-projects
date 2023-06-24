@@ -41,7 +41,7 @@ const DataVisualization = ({ url, title, subtitle, id }) => {
     useEffect(() => {
         const percentWidth = window.innerWidth * 0.8;
         if (data) {
-            renderD3(data, id, percentWidth, 700)
+            renderD3(data, id, percentWidth, 900)
         }
     }, [data, id]);
     return (
@@ -59,7 +59,6 @@ const DataVisualization = ({ url, title, subtitle, id }) => {
 };
 
 const App = () => {
-
     return (
         <React.Fragment>
             <TabSwitcher
