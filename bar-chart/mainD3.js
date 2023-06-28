@@ -76,20 +76,20 @@ export const d3Code = (data, width, height) => {
         .attr('class', 'bar')
         .attr('data-date', d => d[0])
         .attr('data-gdp', d => d[1])
-        .on('mouseover', function (event, i) {
-
-          tooltip
-            .transition()
-            .duration(20)
-            .style('left', (i * barWidth) + 'px')
-            .style('top', height + 'px')
-            .style('opacity', 0.9);
-          tooltip
-            .html(
-                dataQ[i][0] + ' ' +dataQ[i][1] +
-                '<br>' + '$' + dataQ[i][2] +' Billion'
-            )
-            .attr('data-date', data[i][0])
+        .on('mouseover', function (e, d) {
+            const [x, y] = d3.pointer(e);
+            tooltip
+              .transition()
+              .duration(20)
+              .style('left', (x + (padding / 2)) + 'px')
+              .style('top', y + 'px')
+              .style('opacity', 0.9);
+            tooltip
+              .html(
+                  'Date:' + ' ' + d[0] +
+                  '<br>' + '$' + d[1] +' Billion'
+              )
+              .attr('data-date', d[0])
         })
         .on('mouseout', function () {
             tooltip
