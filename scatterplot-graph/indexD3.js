@@ -117,23 +117,26 @@ export const renderD3 = (data, width, height) => {
             return times[i]
         })
         .attr('fill', (d) => colorsMap.get(d.Nationality))
-        .on('mouseover', (event, i) => {
+        .on('mouseover', function (e, d) {
+            const [x, y] = d3.pointer(e);
+            const dYear = d.Year.getFullYear();
             tooltip
-                .attr('data-year', years[i].getFullYear())
+                .attr('data-year', dYear)
                 .transition()
                 .duration(20)
+                .style('left', (x + (padding / 2)) + 'px')
+                .style('top', y + 'px')
                 .style('opacity', 0.9);
             tooltip
                 .html(
-                  data[i].Name +
+                  d.Name +
                     ': ' +
-                    data[i].Nationality +
+                    d.Nationality +
                     '<br/>' +
                     'Year: ' +
-                    data[i].Year +
-                    (data[i].Doping ? '<br/><br/>' + data[i].Doping : '')
+                    dYear +
+                    (d.Doping ? '<br/><br/>' + d.Doping : '')
                 )
-                .attr('data-date', data[i][0])
         })
         .on('mouseout', () => {
             tooltip
@@ -141,8 +144,5 @@ export const renderD3 = (data, width, height) => {
                 .duration(200)
                 .style('opacity', 0);
         });
-
-        console.log(colorsMap)
-        console.log(data)
     
 } 
