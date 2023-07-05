@@ -19,15 +19,13 @@ const App = () => {
         fetch('https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json')
             .then(res => res.json())
             .then(data => {
-            setEducationData(data)
-        })
-    }, []);
+            setEducationData(data);
 
-    useEffect(() => {
         fetch('https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json')
             .then(res => res.json())
             .then(data => {
             setCountyData(data)
+        })
         })
     }, []);
 
