@@ -111,6 +111,30 @@ export const renderD3 = (data, width, height) => {
             d3.select(e.target)
                 .style('fill', `${educationColors[index]}`);
             tooltip.style('visibility', 'hidden');
+        })
+        .on('touchstart', (e, d) => {
+            d3.event.preventDefault();
+            const [x, y] = d3.touches(e.currentTarget)[0];
+            const showData = educationData.find(obj => obj.fips === d.id);
+            tooltip
+                .style('visibility', 'visible')
+                .style('left', (x + 20) + 'px')
+                .style('top', (y + 10) + 'px')
+                .attr('data-education', showData.bachelorsOrHigher)
+                .html(`
+                    <h3>${showData.state}</h3>
+                    <p>${showData.area_name}</p>
+                    <p>${showData.bachelorsOrHigher}%</p>
+                `)
+            d3.select(e.target).style('fill', '#8A2BE2');
+        })
+        .on('touchend', (e, d) => {
+            d3.event.preventDefault();
+            const showData = educationData.find(obj => obj.fips === d.id);
+            const index = Math.round(scaleEducationColor(showData.bachelorsOrHigher));
+            d3.select(e.target)
+                .style('fill', `${educationColors[index]}`);
+            tooltip.style('visibility', 'hidden');
         });
 
     const colorWidth = xScaleLegendAxis(scaleColorEducation(1)) - xScaleLegendAxis(scaleColorEducation(0));
