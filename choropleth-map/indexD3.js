@@ -113,8 +113,8 @@ export const renderD3 = (data, width, height) => {
             tooltip.style('visibility', 'hidden');
         })
         .on('touchstart', (e, d) => {
-            d3.event.preventDefault();
-            const [x, y] = d3.touches(e.currentTarget)[0];
+            e.preventDefault();
+            const [x, y] = d3.pointer(e);
             const showData = educationData.find(obj => obj.fips === d.id);
             tooltip
                 .style('visibility', 'visible')
@@ -129,7 +129,7 @@ export const renderD3 = (data, width, height) => {
             d3.select(e.target).style('fill', '#8A2BE2');
         })
         .on('touchend', (e, d) => {
-            d3.event.preventDefault();
+            e.preventDefault();
             const showData = educationData.find(obj => obj.fips === d.id);
             const index = Math.round(scaleEducationColor(showData.bachelorsOrHigher));
             d3.select(e.target)
