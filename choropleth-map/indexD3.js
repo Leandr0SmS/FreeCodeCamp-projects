@@ -114,7 +114,7 @@ export const renderD3 = (data, width, height) => {
         })
         .on('touchstart', (e, d) => {
             e.preventDefault();
-            const [x, y] = d3.pointer(e);
+            const {clientX: x, clientY: y} = e.changedTouches[0];
             const showData = educationData.find(obj => obj.fips === d.id);
             tooltip
                 .style('visibility', 'visible')
