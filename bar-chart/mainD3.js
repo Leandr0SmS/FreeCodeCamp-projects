@@ -96,6 +96,29 @@ export const d3Code = (data, width, height) => {
                 .transition()
                 .duration(200)
                 .style('opacity', 0);
+        })
+        .on('touchstart', function (e, d) {
+            e.preventDefault();
+            const {clientX: x, clientY: y} = e.changedTouches[0];
+            tooltip
+              .transition()
+              .duration(20)
+              .style('left', (x - 2 * padding) + 'px')
+              .style('top', (y - 2 * padding) + 'px')
+              .style('opacity', 0.9);
+            tooltip
+              .html(
+                  'Date:' + ' ' + d[0] +
+                  '<br>' + '$' + d[1] +' Billion'
+              )
+              .attr('data-date', d[0])
+        })
+        .on('touchend', function (e) {
+            e.preventDefault();
+            tooltip
+                .transition()
+                .duration(200)
+                .style('opacity', 0);
         });
         
 
