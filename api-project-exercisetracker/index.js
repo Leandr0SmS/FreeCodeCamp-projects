@@ -93,18 +93,10 @@ const user = await User.findById(id);
 if (!user) return res.send("could not find user");
 
 let dateObj = {};
-if (from) {
-dateObj["$gte"] = new Date(from);
-}
-if (to) {
-dateObj["$lte"] = new Date(to);
-}
-let filter = {
-user_id: id,
-};
-if (from || to) {
-filter.date = dateObj;
-}
+const filter = {user_id: id};
+if (from) dateObj["$gte"] = new Date(from);
+if (to) dateObj["$lte"] = new Date(to);
+if (from || to) filter.date = dateObj;
 console.log(filter)
 const exercises = await Exercise.find(filter).limit(+limit ?? 500);
 const log = exercises.map((e) => ({
