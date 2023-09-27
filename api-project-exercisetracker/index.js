@@ -118,16 +118,18 @@ app.get('/api/users/:_id/logs', async (req, res) => {
   if (from) limitObj['$gte'] = new Date(from);
   if (to) limitObj['$lte'] = new Date(to);
 
-  const filter = { user_id: userId };
+  const filter = { userId: userId };
   if (from || to) filter.date = limitObj;
 
-  const exercises = await Exercise.find(filter).limit(+limit ?? 500)
+  const exercises = await Exercise.find(filter).limit(+limit ?? 500);
 
-  const logFormat = exercises.map(e => ({
-    description: e.description.toString(),
-    duration: parseInt(e.duration),
-    date: new Date(e.date).toDateString,
-  }))
+  console.log(exercises);
+
+  const logFormat = exercises.map((e) => ({
+    description: e.description,
+    duration:parseInt(e.duration),
+    date: e.date,
+  }));
 
   res.json({
     username: user.username,
