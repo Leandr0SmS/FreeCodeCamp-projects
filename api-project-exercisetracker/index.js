@@ -79,33 +79,44 @@ app.post('/api/users/:_id/exercises', async (req, res) => {
     ? new Date(req.body.date).toDateString() 
     : new Date().toDateString()
   const foundUsername = await User.findById(userId);
-
   if (!foundUsername) {
-    res.json({message: "No user with thieses infos"})
-  }
-
-  try {
-    const findExercise = await Exercise.findOne({
-      username: foundUsername.username,
-      description,
-      duration,
-      date,
-      userId
-    })
-    if (findExercise) {
-      res.json(findExercise)
-    } else {
-      const exercise = await Exercise.create({
+    res.json({message: "No user found"})
+  } else {
+    try {
+      const findExercise = await Exercise.findOne({
         username: foundUsername.username,
         description,
         duration,
         date,
         userId
       })
-      res.json(exercise)
+      if (findExercise) {
+        res.json({
+          _id: findExercise.userId,
+          username: findExercise.username,
+          date: new Date(findExercise.date).toDateString(),
+          duration: findExercise.duration,
+          description: findExercise.description,
+        })
+      } else {
+        const exercise = await Exercise.create({
+          username: foundUsername.username,
+          description,
+          duration,
+          date,
+          userId
+        })
+        res.json({
+          _id: exercise.userId,
+          username: exercise.username,
+          date: new Date(exercise.date).toDateString(),
+          duration: exercise.duration,
+          description: exercise.description,
+        })
+      }
+    } catch(err) {
+      res.send("There was a error")
     }
-  } catch(err) {
-    res.send(err)
   }
 })
 
