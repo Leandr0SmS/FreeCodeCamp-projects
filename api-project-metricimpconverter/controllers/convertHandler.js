@@ -8,7 +8,7 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     let result;
-    const regExp = new RegExp(/\d/);
+    const regExp = new RegExp(/\d+(\.?\d*)?/);
     const num = input.match(regExp);
     result = parseFloat(num);
     if (result) {
@@ -20,7 +20,7 @@ function ConvertHandler() {
   
   this.getUnit = function(input) {
     const inputLower = input.toLowerCase();
-    const regExp = new RegExp(/\D/, 'g');
+    const regExp = new RegExp(/[^\d.\s]+/, 'g');
     const inputUnit = inputLower.match(regExp)
       .map(e => e === 'l' ? 'L' : e)
       .join('');
@@ -95,16 +95,16 @@ function ConvertHandler() {
     return Number(result.toFixed(5));
   };
   
-  this.getString = function(initNum, initUnit, returnNum, returnUnit) {
+  this.getString = (initNum, initUnit, returnNum, returnUnit) => {
     
-
-    return { 
-      initNum: initNum, 
-      initUnit: initUnit, 
-      returnNum: returnNum, 
-      returnUnit: returnUnit, 
-      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}` 
-    }
+    result = {
+      initNum,
+      initUnit,
+      returnUnit,
+      returnNum,
+      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`
+    };
+    return result;
 
   };
   
