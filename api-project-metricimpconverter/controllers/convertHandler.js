@@ -46,30 +46,22 @@ function ConvertHandler() {
   };
 
   this.spellOutUnit = function(unit) {
-    let result;
     switch (unit) {
       case 'L':
-        result = 'liters'
-        break;
+        return 'liters'
       case 'gal':
-        result = 'gallons'
-        break;
+        return 'gallons'
       case 'km':
-        result = 'kilometers'
-        break;
+        return 'kilometers'
       case 'mi':
-        result = 'miles'
-        break;
+        return 'miles'
       case 'lbs':
-        result = 'pounds'
-        break;
+        return 'pounds'
       case 'kg':
-        result = 'kilograms'
-        break;
+        return 'kilograms'
       default:
-        break;
+      return 'Unit Not found to spell'
     }
-    return result;
   };
   
   this.convert = function(initNum, initUnit) {
@@ -98,7 +90,7 @@ function ConvertHandler() {
         result = initNum / lbsToKg;
         break;
       default:
-        break;
+        return 'Unit not found to convert'
     }
     return Number(result.toFixed(5));
   };
@@ -107,21 +99,15 @@ function ConvertHandler() {
     
 
     return { 
-      initNum: 3.1, 
-      initUnit: 'mi', 
-      returnNum: 4.98895, 
-      returnUnit: 'km', 
-      string: '3.1 miles converts to 4.98895 kilometers' 
+      initNum: initNum, 
+      initUnit: initUnit, 
+      returnNum: returnNum, 
+      returnUnit: returnUnit, 
+      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}` 
     }
 
   };
   
 }
-
-//test
-const c = new ConvertHandler();
-
-
-console.log(c.convert(1, 'kg'));
 
 module.exports = ConvertHandler;
