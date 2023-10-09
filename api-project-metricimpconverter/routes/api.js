@@ -5,11 +5,7 @@ const ConvertHandler = require('../controllers/convertHandler.js');
 
 module.exports = function (app) {
   
-  let convertHandler = new ConvertHandler([
-                            ['gal', 'L'],
-                            ['lbs', 'kg'],
-                            ['mi', 'km']
-                          ]);
+  let convertHandler = new ConvertHandler();
   const {
     getNum,
     getUnit,

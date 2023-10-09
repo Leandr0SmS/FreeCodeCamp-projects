@@ -7,15 +7,25 @@ function ConvertHandler() {
   ]
   
   this.getNum = function(input) {
-    let result;
-    const regExp = new RegExp(/\d+(\.?\d*)?/);
-    const num = input.match(regExp);
-    result = parseFloat(num);
-    if (result) {
-      return result;
+    let number;
+    const trimmedinput = input.replace(/\s/g, "");
+    const regExp = new RegExp(/(\d*\.?\d*)(\/?)(\d+\.?\d*)(\/?)/);
+    const numMatch = trimmedinput.match(regExp);
+
+    if (!numMatch || /\/$/.test(numMatch[0])) {
+      console.log('invalid number')
     } else {
-      return 'invalid number';
-    }
+      const splitNum = numMatch[0].split('/');
+      if (splitNum.length > 1) {
+        number = parseFloat(splitNum[0] / splitNum[1]);
+        console.log(number)
+        return number
+      } else {
+        number = parseFloat(splitNum.join());
+        console.log(number)
+        return number
+      }
+    };
   };
   
   this.getUnit = function(input) {
@@ -26,7 +36,7 @@ function ConvertHandler() {
       .join('');
     const find = unitsRel.filter(relations => relations.includes(inputUnit));
     if (find.length == 0) {
-      return 'invalid unit'
+      return false;
     } else {
       return inputUnit;
     }
@@ -100,8 +110,8 @@ function ConvertHandler() {
     result = {
       initNum,
       initUnit,
-      returnUnit,
       returnNum,
+      returnUnit,
       string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`
     };
     return result;
