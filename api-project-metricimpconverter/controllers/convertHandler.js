@@ -35,10 +35,10 @@ function ConvertHandler() {
   this.getUnit = function(input) {
     const inputLower = input.toLowerCase();
     const regExp = new RegExp(/(?!\/)[^\d.\s]+/, 'g');
+    console.log(inputLower.match(regExp))
     const inputUnit = inputLower.match(regExp)
       .map(e => e === 'l' ? 'L' : e)
       .join('');
-    console.log(inputUnit)
     const find = unitsRel.filter(relations => relations.includes(inputUnit));
     if (find.length == 0) {
       return false;
