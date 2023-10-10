@@ -13,31 +13,32 @@ function ConvertHandler() {
     const removedWords = removedSpace.replace(wordsRegExp, '');
     const slashArray = removedWords.split('/');
     if (slashArray.length > 2) {
-      return 0
+      return false
     } else {
+      if (slashArray.length == 1 && slashArray[0] == '') {
+        return 1;
+      }
       const numRegExp = new RegExp(/^[+-]?(\d*\.)?\d+$/);
       const checkNum = slashArray.every(n => numRegExp.test(n))
-      console.log(checkNum)
       if (checkNum) {
         if (slashArray.length == 1) {
-          console.log(parseFloat(slashArray))
           return parseFloat(slashArray);
         } else {
-          console.log(parseFloat(slashArray[0]) / parseFloat(slashArray[1]))
           return parseFloat(slashArray[0]) / parseFloat(slashArray[1])
         }
       } else {
-        return 0
+        return false
       }
     }
   };
   
   this.getUnit = function(input) {
     const inputLower = input.toLowerCase();
-    const regExp = new RegExp(/[^\d.\s]+/, 'g');
+    const regExp = new RegExp(/(?!\/)[^\d.\s]+/, 'g');
     const inputUnit = inputLower.match(regExp)
       .map(e => e === 'l' ? 'L' : e)
       .join('');
+    console.log(inputUnit)
     const find = unitsRel.filter(relations => relations.includes(inputUnit));
     if (find.length == 0) {
       return false;
@@ -110,18 +111,25 @@ function ConvertHandler() {
   };
   
   this.getString = (initNum, initUnit, returnNum, returnUnit) => {
-    
-    result = {
-      initNum,
-      initUnit,
-      returnNum,
-      returnUnit,
-      string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`
-    };
-    return result;
 
-  };
-  
+    if (!initNum) {
+      if (!initNum && !initUnit) {
+        return 'invalid number and unit';
+      }
+      return 'invalid number';
+    } else if (!initUnit) {
+      return 'invalid unit';
+    } else {
+      result = {
+        initNum,
+        initUnit,
+        returnNum,
+        returnUnit,
+        string: `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`
+      };
+      return result;
+    }
+  }
 }
 
 module.exports = ConvertHandler;
