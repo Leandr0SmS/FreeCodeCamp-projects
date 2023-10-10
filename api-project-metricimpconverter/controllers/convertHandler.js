@@ -7,25 +7,29 @@ function ConvertHandler() {
   ]
   
   this.getNum = function(input) {
-    let number;
-    const trimmedinput = input.replace(/\s/g, "");
-    const regExp = new RegExp(/(\d*\.?\d*)(\/?)(\d+\.?\d*)(\/?)/);
-    const numMatch = trimmedinput.match(regExp);
 
-    if (!numMatch || /\/$/.test(numMatch[0])) {
-      console.log('invalid number')
+    const removedSpace = input.replace(/\s/, '');
+    const wordsRegExp = new RegExp(/[a-z]*/, 'gi');
+    const removedWords = removedSpace.replace(wordsRegExp, '');
+    const slashArray = removedWords.split('/');
+    if (slashArray.length > 2) {
+      return 0
     } else {
-      const splitNum = numMatch[0].split('/');
-      if (splitNum.length > 1) {
-        number = parseFloat(splitNum[0] / splitNum[1]);
-        console.log(number)
-        return number
+      const numRegExp = new RegExp(/^[+-]?(\d*\.)?\d+$/);
+      const checkNum = slashArray.every(n => numRegExp.test(n))
+      console.log(checkNum)
+      if (checkNum) {
+        if (slashArray.length == 1) {
+          console.log(parseFloat(slashArray))
+          return parseFloat(slashArray);
+        } else {
+          console.log(parseFloat(slashArray[0]) / parseFloat(slashArray[1]))
+          return parseFloat(slashArray[0]) / parseFloat(slashArray[1])
+        }
       } else {
-        number = parseFloat(splitNum.join());
-        console.log(number)
-        return number
+        return 0
       }
-    };
+    }
   };
   
   this.getUnit = function(input) {
