@@ -63,12 +63,90 @@ suite('Unit Tests', function(){
         };
         done();
     });
-    test('Correct return unit for each valid input unit');
-    test('Return the spelled-out string unit for each valid input unit');
-    test('Convert gal to L');
-    test('Convert L to gal');
-    test('Convert mi to km');
-    test('Convert km to mi');
-    test('Convert lbs to kg');
-    test('Convert kg to lbs');
+    test('Correct return unit for each valid input unit', (done) => {
+        const units = {
+            'gal': 'L',
+            'km': 'mi',
+            'lbs': 'kg',
+        };
+        for (const [key, value] of Object.entries(units)) {
+            assert.equal(convertHandler.getReturnUnit(key), value);
+            assert.equal(convertHandler.getReturnUnit(value), key);
+        };
+        done();
+    });
+    test('Return the spelled-out string unit for each valid input unit', (done) => {
+        const spellOut = {
+            'L': 'liters',
+            'gal': 'gallons',
+            'mi': 'miles',
+            'km': 'kilometers',
+            'lbs': 'pounds',
+            'kg': 'kilograms'
+        };
+        for (const [key, value] of Object.entries(spellOut)) {
+            assert.equal(convertHandler.spellOutUnit(key), value);
+        };
+        done();
+    });
+    test('Convert gal to L', (done) => {
+        const [initNum, initUnit] = [10, 'gal'];
+        const result = 37.85410;
+        assert.approximately(
+            convertHandler.convert(initNum, initUnit),
+            result,
+            0.0001
+        );
+        done();
+    });
+    test('Convert L to gal', (done) => {
+        const [initNum, initUnit] = [10, 'L'];
+        const result = 2.64172;
+        assert.approximately(
+            convertHandler.convert(initNum, initUnit),
+            result,
+            0.0001
+        );
+        done();
+    });
+    test('Convert mi to km', (done) => {
+        const [initNum, initUnit] = [10, 'mi'];
+        const result = 16.09340;
+        assert.approximately(
+            convertHandler.convert(initNum, initUnit),
+            result,
+            0.0001
+        );
+        done();
+    });
+    test('Convert km to mi', (done) => {
+        const [initNum, initUnit] = [10, 'km'];
+        const result = 6.21373;
+        assert.approximately(
+            convertHandler.convert(initNum, initUnit),
+            result,
+            0.0001
+        );
+        done();
+    });
+    test('Convert lbs to kg', (done) => {
+        const [initNum, initUnit] = [10, 'lbs'];
+        const result = 4.53592;
+        assert.approximately(
+            convertHandler.convert(initNum, initUnit),
+            result,
+            0.0001
+        );
+        done();
+    });
+    test('Convert kg to lbs', (done) => {
+        const [initNum, initUnit] = [10, 'kg'];
+        const result = 22.04624;
+        assert.approximately(
+            convertHandler.convert(initNum, initUnit),
+            result,
+            0.0001
+        );
+        done();
+    });
 });
