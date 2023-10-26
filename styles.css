@@ -199,3 +199,27 @@ a {
         font-size: 1.5rem;
     }
 }
+
+@media (max-width: 480px) {
+    #calculator {
+      box-shadow: 0rem 1rem 1.875rem -0.625rem #1f2527;
+      padding: 1rem;
+      grid-template-columns: repeat(12, 1.5rem);
+      grid-template-rows: repeat(12, 1.8rem);
+    }
+    .btn {
+      font-size: 1rem;
+    }
+    .big {
+      margin-left: 0.3rem;
+    }
+    #screen {
+      height: auto;
+      min-width: 18rem;
+      margin-bottom: 1rem;
+      border: 0.3rem solid #5f635e;
+    }
+    #formula, #display {
+      font-size: 0.6rem;
+    }
+}
