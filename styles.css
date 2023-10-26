@@ -82,7 +82,15 @@ a {
 }
 
 .project:hover {
-    border: 5px solid var(--Cinnabar);
+    box-shadow: rgba(223, 235, 112, 0.4) -3px 3px,
+                rgba(223, 235, 170, 0.3) -6px 6px, 
+                rgba(223, 235, 170, 0.2) -9px 9px,
+                rgba(223, 235, 170, 0.1) -12px 12px,
+                rgba(223, 235, 170, 0.05) -15px 15px;
+    -webkit-transform: scale(1.02, 1.02);
+    transform: scale(1.02, 1.02) ;
+    transition: box-shadow 0.3s ease-in-out,
+                transform 0.3s ease-in-out;
 }
 
 .project-title {
