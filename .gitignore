@@ -87,3 +87,9 @@ profile_default/
 ipython_config.py
 
 node_modules
+npm-debug.log
+yarn-error.log
+vscode/
+.vscode/
+.idea/
+*.sublime-project
