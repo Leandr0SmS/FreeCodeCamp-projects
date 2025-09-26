@@ -26,20 +26,20 @@ The dataset contains the number of page views each day on the freeCodeCamp.org f
 
 Use the data to complete the following:
 
-1. **Import and clean data**
+- 1 **Import and clean data**
 
 - Use Pandas to import data from `fcc-forum-pageviews.csv`.
 - Set the index to the date column.
 - Filter out days in the top 2.5% and bottom 2.5% of page views.
 
-2. **Line plot**
+- 2 **Line plot**
 
 - Implement `draw_line_plot` using Matplotlib.
 - Chart similar to `examples/Figure_1.png`.
 - Title: `Daily freeCodeCamp Forum Page Views 5/2016-12/2019`.
 - X label: `Date`, Y label: `Page Views`.
 
-3. **Bar plot**
+- 3 **Bar plot**
 
 - Implement `draw_bar_plot` using Matplotlib.
 - Chart similar to `examples/Figure_2.png`.
@@ -47,7 +47,7 @@ Use the data to complete the following:
 - Legend: month labels, title `Months`.
 - X label: `Years`, Y label: `Average Page Views`.
 
-4. **Box plots**
+- 4 **Box plots**
 
 - Implement `draw_box_plot` using Seaborn.
 - Two adjacent box plots similar to `examples/Figure_3.png`.
