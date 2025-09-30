@@ -8,8 +8,8 @@ function createProjectCard(project) {
 
     const img = document.createElement('img');
     img.className = 'project-image';
-    // Try to load thumbnail, fall back to a placeholder
-    img.src = project.image || `${project.path}/images/preview.png`;
+    img.src = project.image;
+    console.log('Image source for project', project.title, ':', img.src);
     img.alt = project.title;
 
     const title = document.createElement('p');

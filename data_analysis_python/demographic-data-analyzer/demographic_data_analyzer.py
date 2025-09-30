@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 
 def calculate_demographic_data(print_data=True):
@@ -69,7 +70,17 @@ def calculate_demographic_data(print_data=True):
     india_occupation_salary = df_india[['occupation', 'salary']]
     top_IN_occupation_count = india_occupation_salary[df_india['salary'] == '>50K']['occupation'].value_counts()
     top_IN_occupation = top_IN_occupation_count.idxmax()
-
+    
+    # Create a visualization
+    plt.figure(figsize=(10, 6))
+    plt.bar(country_percentages.index, country_percentages.values)
+    plt.title('Percentage of People Earning >50K by Country')
+    plt.xlabel('Country')
+    plt.ylabel('Percentage')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('demographic_data.png')
+    
     # DO NOT MODIFY BELOW THIS LINE
 
     if print_data:
