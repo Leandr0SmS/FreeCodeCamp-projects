@@ -15,8 +15,8 @@ print(f'1------------\n{df.head()}\n{df.shape}\n-----------')
 # Clean data
 #Filter out days in the top 2.5% and bottom 2.5% of page views.
 df = df[
-    (df['value'] >= df['value'].quantile(0.25)) & 
-    (df['value'] <= df['value'].quantile(0.75))
+    (df['value'] >= df['value'].quantile(0.025)) & 
+    (df['value'] <= df['value'].quantile(0.975))
     ]
 
 print(f'2------------\n{df.head()}\n{df.shape}\n-----------')
@@ -45,26 +45,50 @@ def draw_bar_plot():
     df_bar['month_name'] = df_bar.index.strftime('%B')
 
     # Group by year and month, then calculate mean
-    df_grouped = df_bar.groupby(['year', 'month_name']).mean(numeric_only=True).reset_index()
+    df_grouped = df_bar.groupby(['year', 'month']).mean(numeric_only=True).reset_index()
+    
+    # Create ordered month names
+    month_order = [
+        'January', 
+        'February', 
+        'March', 
+        'April', 
+        'May', 
+        'June', 
+        'July', 
+        'August', 
+        'September', 
+        'October', 
+        'November', 
+        'December'
+    ]
+    month_num_to_name = {i: name for i, name in enumerate(month_order, 1)}
+    df_grouped['month_name'] = df_grouped['month'].map(month_num_to_name)
+    
+    # Sort by year and month for proper ordering
+    df_grouped = df_grouped.sort_values(['year', 'month'])
 
-    # Ensure months are in correct order
-    month_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    df_grouped['month_name'] = pd.Categorical(df_grouped['month_name'], categories=month_order, ordered=True)
-    df_grouped = df_grouped.sort_values(['year', 'month_name'])
+    # Create pivot table with years as index and months as columns (ordered)
+    df_pivot = df_grouped.pivot(index='year', columns='month', values='value')
+    # Ensure columns 1..12 present and ordered
+    df_pivot = df_pivot.reindex(columns=range(1, 13))
+    month_order = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+    ]
+    # Rename numeric month columns to names
+    df_pivot.columns = month_order
 
-    # Draw bar plot
-    fig, ax = plt.subplots(figsize=(15,5))
-    sns.barplot(
-        data=df_grouped,
-        x='year',
-        y='value',
-        hue='month_name',
-        hue_order=month_order,
-        ax=ax
-    )
+    # Draw bar plot using pandas' plotting (grouped bars)
+    fig, ax = plt.subplots(figsize=(15, 10))
+    df_pivot.plot(kind='bar', ax=ax)
+
+    # Set labels and formatting
     ax.set_xlabel('Years')
     ax.set_ylabel('Average Page Views')
+    ax.legend(title='Months')
     ax.grid(True)
+
     # Save image and return fig (don't change this part)
     fig.savefig('bar_plot.png')
     return fig
@@ -86,7 +110,20 @@ def draw_box_plot():
         orientation='vertical'
     )
     # Ensure months are in correct order
-    month_order = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    month_order = [
+        'Jan', 
+        'Feb', 
+        'Mar', 
+        'Apr', 
+        'May', 
+        'Jun', 
+        'Jul', 
+        'Aug', 
+        'Sep', 
+        'Oct', 
+        'Nov', 
+        'Dec'
+    ]
     sns.boxplot(
         x='month', 
         y='value', 
@@ -98,9 +135,24 @@ def draw_box_plot():
     axes[0].set_title('Year-wise Box Plot (Trend)')
     axes[0].set_xlabel('Year')
     axes[0].set_ylabel('Page Views')
+    axes[0].set_ylim(bottom=0, top=200000)
+    axes[0].set_yticks([
+        0, 
+        20000, 
+        40000, 
+        60000, 
+        80000, 
+        100000,
+        120000, 
+        140000, 
+        160000, 
+        180000, 
+        200000
+    ])
     axes[1].set_title('Month-wise Box Plot (Seasonality)')
     axes[1].set_xlabel('Month')
     axes[1].set_ylabel('Page Views')
+    axes[1].set_ylim(bottom=0, top=200000)
 
     # Save image and return fig (don't change this part)
     fig.savefig('box_plot.png')
