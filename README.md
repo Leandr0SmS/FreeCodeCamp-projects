@@ -47,7 +47,7 @@ This repository contains all the projects I completed as part of the FreeCodeCam
 
 ## Help
 
-Any comment or suggestion please contact me <a href="mailto:leandrosimoesms@gmail.com" target="_blank">
+Any comment or suggestion please contact me [leandrosimoesms@gmail.com](mailto:leandrosimoesms@gmail.com)
 
 ## Acknowledgments
 
