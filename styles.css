@@ -54,6 +54,20 @@ main {
     text-shadow: 2px 2px 1px #1d1d2cf6;
 }
 
+/* Make category links (top-level li > a) larger and more prominent than project sublinks */
+#navlist > li > a.nav-link {
+    font-size: 1.7rem;
+    font-weight: 700;
+}
+
+/* Project sublinks are indented and smaller */
+#navlist .nav-subitem .nav-link {
+    font-size: 1.05rem;
+    padding-left: 0.6rem;
+    font-weight: 400;
+    opacity: 0.95;
+}
+
 a {
     text-decoration: none;
     color: var(--Ivory);
