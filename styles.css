@@ -64,7 +64,7 @@ a {
     font-size: 3rem;
 }
 
-#projects-grid,
+#projects-container,
 .projects-grid {
     /* Flex layout so cards flow horizontally and wrap */
     display: flex;
