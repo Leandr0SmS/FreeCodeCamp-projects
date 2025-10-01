@@ -120,26 +120,26 @@ const projectsData = [
         ]
     },
     {
-        "id": "html_css",
+        "id": "html-css",
         "projects": [
             {
                 "title": "Landing Page",
                 "category": "HTML/CSS",
-                "path": "html_css/landing-page",
+                "path": "html-css/landing-page",
                 "description": "A responsive landing page built with HTML and CSS.",
                 "image": "html-css/matutu-landing-page/img/marca-04.png"
             },
             {
                 "title": "Tribute Page",
                 "category": "HTML/CSS",
-                "path": "html_css/tribute-page",
+                "path": "html-css/tribute-page",
                 "description": "A tribute page honoring a person or event, using HTML and CSS.",
                 "image": "html-css/tribute-page/img/ernst-gotsh.jpg"
             },
             {
                 "title": "Survey Form",
                 "category": "HTML/CSS",
-                "path": "html_css/survey-form",
+                "path": "html-css/survey-form",
                 "description": "A survey form created with HTML and CSS for user input.",
                 "image": "html-css/survey-form/img/beans.jpg"
             },
@@ -148,7 +148,7 @@ const projectsData = [
                 "category": "HTML/CSS",
                 "path": "html-css/portfolio-page",
                 "description": "A personal portfolio website showcasing projects and skills.",
-                "image": "html-css/portfolio-page/img/camp.jpg"
+                "image": "html-css/portifolio-page/img/programing.png"
             }
         ]
     }, 

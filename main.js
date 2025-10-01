@@ -17,7 +17,8 @@ function createProjectCard(project) {
     title.textContent = project.title;
 
     const link = document.createElement('a');
-    link.href = project.path + (project.path.endsWith('/') ? '' : '/');
+    const rootPath = "https://github.com/Leandr0SmS/FreeCodeCamp-projects/tree/main/"
+    link.href = rootPath + project.path + (project.path.endsWith('/') ? '' : '/');
     link.target = '_blank';
     link.appendChild(img);
     link.appendChild(title);
